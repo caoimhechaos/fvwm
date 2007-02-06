@@ -1,0 +1,35 @@
+.\" t
+.\" @(#)FvwmAuto.1	12/1/94
+.TH FvwmAuto 2.0 "Dec 1, 1994"
+.UC
+.SH NAME
+FvwmAuto \- the FVWM auto-raise module
+.SH SYNOPSIS
+FvwmAuto is spawned by fvwm, so no command line invocation will work.
+An appropriate invocation from fvwm looks like:
+.nf
+.sp
+Module FvwmAuto 200
+.sp
+.fi
+or, from a menu:
+Popup "Module-Popup"
+        Title   "Modules"
+        Module  "GoodStuff"     GoodStuff
+        Module  "NoClutter"     FvwmClean
+        Module  "FvwmIdentify"  FvwmIdent
+        Module  "Banner"        FvwmBanner
+        Module  "Debug"         FvwmDebug
+        Module  "SaveDesktop"   FvwmSave
+        Module  "AutoRaise"     FvwmAuto 200
+EndPopup
+.sp
+.fi             
+
+The numeric argument is required. It specified how long a window
+must retain the keyboard input focus before it is raised. The delay
+is measured in milliseconds, and any integer 0 or greater is acceptable.
+
+.SH AUTHOR
+FvwmAuto just appeared one day, nobody knows how.
+

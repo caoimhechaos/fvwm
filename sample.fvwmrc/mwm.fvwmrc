@@ -1,0 +1,470 @@
+# Unfortunately, order does matter in this file
+# The correct order for inserting configurations is:
+# 1. Colors
+# 2. Assorted configuration paramters such as ClickToFocus, or MWMBorders
+# 3. Path setup (ModulePath, PixmapPath, IconPath)
+# 4. Style settings, including the default style Style "*" ...
+# 5. InitFunction and ResetFunction definitions.
+# 6. Other Functions. Functions cannot be forward referenced from
+#	other functions, but they can be backward referenced.
+# 7. Menus definitions. Same caveats about forward referencing
+# 8. Key and Mouse Bindings.
+# 9. Module options.
+
+# The order of steps 5, 6, and 7 is not critical, as long as there are
+# no forward references to functions or menus.
+
+# If you get it wrong, the most common problem is that color or font settings
+# are ignored
+
+# If you use this, you should either compile with
+# -DMENU_HOTKEYS, or you should remove the & from the
+# menu item labels
+#
+# Use of -DWINDOWLIST_HOTKEYS is recommended, but not
+# required.
+
+#############################################################################
+# set up the colors
+#
+# this is used for the selected window
+HiForeColor 		Black
+HiBackColor 		#5f9ea0
+
+# these are used for unselected sticky windows 
+StickyForeColor		Black
+StickyBackColor		#908090
+
+# Menu colors
+MenuForeColor           Black
+MenuBackColor           grey
+MenuStippleColor        SlateGrey
+
+
+############################################################################
+# Now the fonts - one for menus/icons, another for window titles
+Font			fixed
+WindowFont		fixed
+
+###########################################################################
+# Set up the major operating modes
+#
+#############################################################################
+# Use inferior motif-like everything
+# Wimpy shallow chiselling on decorations
+MWMBorders
+# Only shows title-bar buttons depressed, reverses patern style on far
+# right button when maximized
+MWMButtons
+# MWM - style (look and feel) menus
+MWMMenus
+# Try to abide by mwm decoration hints...
+MWMDecorHints
+# Try to abide by mwm function hints...
+MWMFunctionHints
+
+DecorateTransients
+
+# Set windows to auto-raise after 750 milliseconds
+#AutoRaise 750
+
+# Normally, we'll be in focus-follows mouse mode, but uncomment this 
+# for mwm-style click-to-focus
+ClickToFocus
+
+# Auto Place Icons is a nice feature....
+IconBox 5 -80 -140 -5
+IconBox 5 -160 -140 -85
+IconBox 5 -240 -140 -165
+IconBox 5 -320 -140 -245
+
+# If you uncomment this, and make sure that the WindowList is bound to
+# something, it works pretty much like an icon manager.
+#SuppressIcons
+
+# If you don't like the default 150 msec click delay for the complex functions
+# change this and uncomment it.
+#ClickTime 150
+
+ButtonStyle 1 50x22
+ButtonStyle 2 50x50
+ButtonStyle 4 22x22
+
+##########################################################################
+# Assorted paths to important files
+#
+# ModulePath is a colon-separated list, just like regular unix PATH
+ModulePath /usr/lib/X11/fvwm
+
+# Pixmap and icon paths are also colon separated lists
+PixmapPath	     /usr/include/X11/pixmaps
+IconPath	     /usr/include/X11/bitmaps
+
+###########################################################################
+# Set up the virtual desktop and pager
+
+#set the desk top size in units of physical screen size
+DeskTopSize 2x2
+
+# and the reduction scale used for the panner/pager
+DeskTopScale 32
+
+# flip by whole pages on the edge of the screen.
+EdgeScroll 100 100
+
+# A modest delay before flipping pages seems to be nice...
+# I thresh in a 50 pixel Move-resistance too, just so people
+# can try it out.
+EdgeResistance 250 50
+
+RandomPlacement
+
+############################################################################
+# Set the decoration styles and window options
+# Order is important!!!!
+# If compatible styles are set for a single window in multiple Style
+# commands, then the styles are ORed together. If conflicting styles
+# are set, the last one specified is used.
+
+# These commands should command before any menus or functions are defined,
+# and before the internal pager is started.
+
+# change the default width.
+Style "*" Color Black/#d3d3d3,Icon unknown1.xpm,HandleWidth 11,BorderWidth 6
+
+Style "Fvwm*"      NoTitle, NoHandles, Sticky, WindowListSkip,BorderWidth 0
+Style "Fvwm Pager" StaysOnTop
+Style "FvwmPager"  StaysOnTop
+Style "FvwmBanner" StaysOnTop
+Style "GoodStuff"  NoTitle, NoHandles, Sticky, WindowListSkip,BorderWidth 0
+Style "*lock"      NoTitle, NoHandles, Sticky, WindowListSkip
+Style "xbiff"      NoTitle,            Sticky, WindowListSkip
+Style "Maker"      StartsOnDesk 1
+Style "matlab"     StartsOnDesk 3
+Style "signal"     StartsOnDesk 3 
+Style "rxvt"       Icon  term.xpm
+Style "xterm"      Icon xterm.xpm, Color black/grey
+Style "Appointment" Icon datebook.xpm
+Style "xcalc"      Icon xcalc.xpm
+Style "xbiff"      Icon mail1.xpm
+Style "xmh"        Icon mail1.xpm, StartsOnDesk 2
+Style "xman"	   Icon xman.xpm
+Style "xvgr"	   Icon graphs.xpm
+Style "matlab"	   Icon math4.xpm
+Style "xmag"	   Icon mag_glass.xpm
+Style "xgraph"	   Icon graphs.xpm
+Style "GoodStuff"  Icon toolbox.xpm
+
+
+#############################################################################
+# Stuff to do at start-up
+
+Function "InitFunction"
+	Module	"I"	FvwmBanner
+	Exec	"I"	xpmroot /usr/include/X11/pixmaps/fvwm.xpm &
+	Module	"I"	GoodStuff
+	Module	"I"	FvwmPager 0 3
+	Exec	"I"	exec xterm -geometry 80x64+0+0 &
+	Wait	"I"	xterm
+	Desk	"I"	0 2
+        Exec    "I"     exec xterm
+        Wait    "I"     xterm
+	Desk 	"I"	0 0
+EndFunction
+
+Function "RestartFunction"
+	Exec	"I"	xsetroot -solid "#266294"      
+	Module	"I"	GoodStuff
+	Module	"I"	FvwmPager 0 3
+EndFunction
+
+
+##############################################################################
+#now define the menus - defer bindings until later
+
+# This menu is invoked as a sub-menu - it allows you to quit,
+# restart, or switch to another WM.
+Popup "Quit-Verify"
+	Title	"Really Quit Fvwm?	"
+	Quit	"Yes, Really Quit	"
+	Restart "Restart Fvwm	" fvwm
+	Restart "Start twm	" twm
+	Restart "Start mwm	" mwm
+	Restart "Start olwm	" /usr/openwin/bin/olwm
+	Nop	""
+	Nop	"No, Don't Quit	"
+EndPopup
+
+# Provides a list of modules to fire off
+Popup "Module-Popup"
+	Title	"Modules"
+	Module	"GoodStuff"	GoodStuff
+	Module	"NoClutter"	FvwmClean
+	Module	"FvwmIdentify"	FvwmIdent
+	Module  "Banner"        FvwmBanner
+	Module	"Debug"		FvwmDebug
+	Module  "SaveDesktop"   FvwmSave
+	Module  "Pager"         FvwmPager 0 3
+	Module  "FvwmWinList"   FvwmWinList
+EndPopup
+
+
+# This menu will fire up some very common utilities
+Popup "Utilities"
+	Title 	"Utilities	"
+	Exec    "Xterm	"		exec xterm &
+	Exec    "Rxvt	"		exec rxvt &
+	Exec    "Top	"		exec rxvt -T Top -n Top -e top &
+	Exec	"Calculator	"	exec xcalc &
+	Exec	"Xman	"		exec xman &
+	Exec	"Xmag	"		exec xmag &
+	Nop	""
+	Popup	"Modules"	Module-Popup
+	Nop	""
+	Popup	"Exit Fvwm	"	Quit-Verify
+EndPopup
+
+# This defines the most common window operations
+Popup "Window Ops"
+	Title	"Window Ops	"
+	Move    "&Move	Alt+F7"
+	Resize  "&Size	Alt+F8" 
+	Lower   "&Lower	Alt+F3"
+	Raise   "Raise	"
+	Stick	"(Un)Stick	"
+	Iconify "(Un)Mi&nimize	Alt+F9"
+	Maximize "(Un)Ma&ximize	Alt+F10"
+	Maximize "(Un)Maximize Vertical	"	0 100
+	Nop     ""
+	Close   "&Close	Alt+F4"
+EndPopup
+
+Popup "Window Ops2"
+	Move    "&Move	Alt+F7"
+	Resize  "&Size	Alt+F8" 
+	Iconify "(Un)Mi&nimize	Alt+F9"
+	Maximize "(Un)Ma&ximize	Alt+F10"
+	Lower   "&Lower	Alt+F3"
+	Nop     ""
+	Close   "&Close	Alt+F4"
+	Nop 	""
+	Module	"&ScrollBar" 	FvwmScroll 2 2
+EndPopup
+Function "Iconify-and-Raise"
+	Iconify	"Motion"
+	Raise "Motion"
+EndPopup
+
+############################################################################
+# Now define some handy complex functions
+
+# This one moves and then lowers the window if you drag the mouse,
+# only lowers the window if you click,  or does a RaiseLower if you double 
+# click
+Function "Move-or-Lower"
+	Move 		"Motion"
+	Lower		"Motion"
+	Lower		"Click"
+	RaiseLower	"DoubleClick"
+EndFunction
+
+Function "Move-or-Iconify"
+	Move 		"Motion"
+	PopUp		"Click" Window Ops2
+	Iconify		"DoubleClick"
+EndFunction
+
+Function "windowops-or-die"
+	PopUp		"Motion" Window Ops2
+	PopUp		"Click" Window Ops2
+	Close 	 	"DoubleClick"
+
+EndFunction
+
+Function "Move-or-Raise"
+	Move            "Motion"
+	Raise           "Motion"
+	Raise           "Click"
+	Iconify      "DoubleClick" 
+EndFunction
+
+Function "Move-or-Lower"
+	Move            "Motion"
+	Lower           "Click"
+	RaiseLower      "DoubleClick"
+EndFunction
+Function "Resize-or-Raise"
+	Resize          "Motion"
+	Raise           "Motion"
+	Raise           "Click"
+	RaiseLower      "DoubleClick"
+EndFunction
+Function "Resize-or-Lower"
+	Resize          "Motion"
+	Lower           "Click"
+	RaiseLower      "DoubleClick"
+EndFunction
+##############################################################################
+# This defines the mouse bindings
+
+# First, for the mouse in the root window
+# Button 1 gives the Utilities menu
+# Button 2 gives the Window Ops menu
+# Button 3 gives the WindowList (like TwmWindows)
+# I use the AnyModifier option for the modifier field, so you can hold down
+# any shift-control-whatever combination you want!
+
+#     Button	Context Modifi 	Function
+Mouse 1		R   	A       PopUp "Utilities"
+Mouse 2		R    	A      	PopUp "Window Ops"
+Mouse 3		R    	A      	WindowList
+
+
+
+# Now the title bar buttons
+# Any button in the left title-bar button gives the window ops menu
+# Any button in the right title-bar button Iconifies the window
+# Note the use of "Mouse 0" for AnyButton.
+
+#     Button	Context Modifi 	Function
+Mouse 0		1    	A      	Function "windowops-or-die"
+Mouse 0		2    	A     	Maximize
+Mouse 0		4    	A     	Iconify
+
+# Now the rest of the frame
+# Here I invoke my complex functions for Move-or-lower, Move-or-raise,
+# and Resize-or-Raise. 
+# Button 1 in the corner pieces, with any modifiers, gives resize or raise
+Mouse 1         FS      A       Function "Resize-or-Raise"
+Mouse 2         FS      A       Function "Resize-or-Lower"
+Mouse 1         T       A       Function "Move-or-Raise"
+Mouse 2         T       A       Function "Move-or-Lower"
+
+Mouse 1		I	A	Function "Move-or-Iconify"
+Mouse 2		I	A	Function "Move-or-Iconify"
+Mouse 3		I	A	PopUp "Window Ops2"
+Mouse 3		FST    	A      	Function "windowops-or-die"
+
+
+############################################################################
+# Now some keyboard shortcuts.
+
+# Arrow Keys
+# press arrow + control anywhere, and scroll by 1 page
+Key Left	A	C	Scroll -100 0
+Key Right	A	C	Scroll +100 +0
+Key Up		A	C	Scroll +0   -100
+Key Down	A	C	Scroll +0   +100
+
+# press arrow + meta key, and scroll by 1/10 of a page
+Key Left	A	M	Scroll -10 +0
+Key Right	A	M	Scroll +10 +0
+Key Up		A	M	Scroll +0   -10
+Key Down	A	M	Scroll +0   +10
+
+# press shift arrow + control anywhere, and move the pointer by 1% of a page
+Key Left	A	SC	CursorMove -1 0
+Key Right	A	SC	CursorMove +1 +0
+Key Up		A	SC	CursorMove +0   -1
+Key Down	A	SC	CursorMove +0   +1
+
+# press shift arrow + meta key, and move the pointer by 1/10 of a page
+Key Left	A	SM	CursorMove -10 +0
+Key Right	A	SM	CursorMove +10 +0
+Key Up		A	SM	CursorMove +0   -10
+Key Down	A	SM	CursorMove +0   +10
+
+# Keyboard accelerators
+Key F1		A	M	Popup "Window Ops"
+Key F2		A	M	Popup "Utilities"
+Key F3		A	M	Lower
+Key F4		A	M	Destroy
+Key F5		A	M	CirculateUp
+Key F6		A	M	CirculateDown
+Key F7		A	M	Move
+Key F8		A	M	Resize
+Key F9		A	M	Iconify
+Key F10		A	M	Maximize
+
+#Page Up/Dapge Down keys are used to scroll by one desktop page
+# in any context, press page up/down + control
+# in root context, just pressing page up/down is OK
+# 
+# I prefer the non-wrapping scroll. These are for example purposes only
+#Key Next	A       C       Scroll 100000 0
+#Key Next	R       N       Scroll 100000 0  
+#Key Prior	A       C       Scroll -100000 0
+#Key Prior	R       N       Scroll -100000 0
+
+
+# Useful olwm type things for Sun keyboards.
+Key L5                IW      N       RaiseLower
+Key L5                IW      S       Lower
+Key L5                IW      C       Raise
+Key L7                IW      A       Iconify
+
+############################################################################
+############################################################################
+##
+## Module Definitions
+##
+############################################################################
+############################################################################
+
+###################### GoodStuff button-bar ################################
+# Colors
+*GoodStuffFore Black
+*GoodStuffBack #908090
+
+# Font
+*GoodStuffFont fixed
+
+# Geometry - really likes to pick its own size, but giving a position is OK
+*GoodStuffGeometry -1-90
+
+# Layout: specify rows or columns, not both
+*GoodStuffColumns 1
+
+# Define the buttons to use.....
+*GoodStuff Kill    rbomb.xpm    Destroy
+
+# xterm or rxvts on remote machines can be done like this
+# Output re-direction is csh style, not sh style
+# You will want to substitute your own hosts here!
+
+*GoodStuff Dopey   rterm.xpm   Exec "" rsh dopey "exec xterm -T dopey -display $HOSTDISPLAY </dev/null >&/dev/null & "&
+*GoodStuff Grumpy  rterm.xpm   Exec "" rsh grumpy "exec xterm -T grumpy -display $HOSTDISPLAY </dev/null >&/dev/null & "&
+*GoodStuff Snoopy  rterm.xpm   Exec "" rsh snoopy "exec xterm -T snoopy -display $HOSTDISPLAY </dev/null >&/dev/null & "&
+*GoodStuff Xcalc   rcalc.xpm   Exec "" xcalc &
+*GoodStuff mail    mail2.xpm   Exec "" xmh &
+
+*GoodStuff Paging  clamp.xpm   TogglePage
+
+########################### Pager #########################################
+*FvwmPagerBack #908090
+*FvwmPagerFore #484048
+*FvwmPagerHilight #cab3ca
+*FvwmPagerGeometry x80-1-1
+*FvwmPagerLabel 0 Misc
+*FvwmPagerLabel 1 FrameMaker
+*FvwmPagerLabel 2 Mail
+*FvwmPagerLabel 3 Matlab
+*FvwmPagerSmallFont 5x8
+
+########################## Window-Identifier ###############################
+# Just choose colors and a fonts
+*FvwmIdentBack MidnightBlue
+*FvwmIdentFore Yellow
+*FvwmIdentFont -adobe-helvetica-medium-r-*-*-12-*-*-*-*-*-*-*
+
+
+
+##########################FvwmWinList##################################
+*FvwmWinListBack #908090
+*FvwmWinListFore Black
+*FvwmWinListFont -adobe-helvetica-bold-r-*-*-10-*-*-*-*-*-*-*
+*FvwmWinListAction Click1 Iconify -1,Raise
+*FvwmWinListAction Click2 Iconify 1
+*FvwmWinListAction Click3 Module "FvwmIdent" FvwmIdent
+*FvwmWinListUseSkipList
+*FvwmWinListGeometry +0-1

@@ -1,0 +1,31 @@
+
+/* Imakefile for fvwm - Identify                                         */
+/* Thu Aug  5 11:21:36 MET DST 1993, mj@dfv.rwth-aachen.de               */
+
+
+/* setup is done entirely in configuration.h now!                        */
+/* You should need to do much in here, excpt maybe add libraries         */
+
+/* I need to get the #define XPM from configuration.h if its in there,   */
+/* so that I can tell if I should include -lXpm                          */
+#include <../../configure.h>
+
+COMPILER
+
+DEPLIBS = $(DEPXLIB)  ../../libs/libfvwmlib.a   
+
+#ifdef AlphaArchitecture
+LOCAL_LIBRARIES = $(XLIB) -ldnet_stub -L../../libs -lfvwmlib     
+#else
+LOCAL_LIBRARIES = $(XLIB) -L../../libs -lfvwmlib     
+#endif
+
+LINTLIBS = $(LINTXLIB)
+
+SRCS = FvwmWinList.c List.c ButtonArray.c Mallocs.c Colors.c 
+OBJS = FvwmWinList.o List.o ButtonArray.o Mallocs.o Colors.o 
+
+TARGET_DIR
+
+ComplexProgramTarget(FvwmWinList)
+

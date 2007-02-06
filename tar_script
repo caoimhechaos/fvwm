@@ -1,0 +1,5 @@
+tar -cvf fvwm-core.tar ChangeLog Imakefile MakeMakefiles README.Install configure.h fvwm.README version.h documentation/WhereToGetIt documentation/error_codes documentation/m4_hacks documentation/mailing_list fvwm sample.fvwmrc libs
+
+tar -cvf fvwm-modules.tar documentation/modules.tex modules xpmroot
+tar -cvf fvwm-icons.tar fvwm_icons
+

@@ -1,0 +1,45 @@
+/* Imakefile for fvwm-1.20 and later. 1/31/94.            */
+/* Procedure is xmkmf; make Makefiles; make all           */
+/*              make install; make install.man            */
+
+/* I need to get the #define XPM from configuration.h if its in there, */
+/* so that I can tell if I should include -lXpm                        */
+#include <configure.h>
+
+#define IHaveSubdirs
+
+/* Can define CDEBUGFLAGS to anything you need */
+/*CDEBUGFLAGS = -LMyLibrarydir*/
+
+ALLSUBDIRS = libs \
+  	  fvwm \
+          modules/GoodStuff \
+          modules/FvwmIdent \
+          modules/FvwmDebug \
+          modules/FvwmBacker \
+	  modules/FvwmClean \
+          modules/FvwmPager \
+	  modules/FvwmAudio \
+          modules/FvwmScroll \
+          modules/FvwmIconBox \
+          modules/FvwmSave \
+          modules/FvwmSaveDesk \
+          modules/FvwmAuto \
+          modules/FvwmWinList
+
+#ifdef XPM
+XPMSUBDIRS = xpmroot modules/FvwmBanner 
+#endif
+
+SUBDIRS = $(ALLSUBDIRS) $(XPMSUBDIRS) $(SHAPESUBDIRS)
+/* I have absolutely no idea what this does, but it seems to be needed */
+#define PassCDebugFlags 'CDEBUGFLAGS=$(CDEBUGFLAGS)'
+
+MakeSubdirs($(SUBDIRS))
+
+/* Doesn't work for me! */
+/* #DependSubdirs($(SUBDIRS))*/
+
+
+
+

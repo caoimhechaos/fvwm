@@ -1,0 +1,55 @@
+
+This is release 1.something of fvwm.
+
+fvwm is a relatively small window manager which provides a 3-D look for window
+decorations and a virtual desktop. It is reconfigurable in a manner
+similar to twm. Most of the Twm functionality has been maintained, with
+some new features added.
+
+I would like to know about any bugs that you find.
+
+In this release, there are many optional configuration items. 
+Edit configure.h in this directory. Look in the file OS_specifics for settings
+that may be required to satisfy your operating system.
+
+Edit the Imakefile in this directory if needed.
+
+You should not need to modify the individual Imakefiles much.
+X11R4 users will want to edit fvwm/Imakefile and change
+	InstallNonExecFile to InstallNonExec
+
+Untar the fvwm-modules.tar file in this directory. If someone would like to
+clean up the build procedure, please do.
+
+Untar the fvwm-icons.tar file in this directory. If someone would like to
+clean up the build procedure, please do.
+
+execute the following commands
+
+	xmkmf
+	make Makefiles
+		(If this command fails or ends in an endless loop,
+		 use the shell script MakeMakefiles).
+	make all
+Monitor the output of the above commands for error messages.
+
+(It is likely that you will need root privilege to write to the
+installation directories. If so, become root now)
+	make install
+	make install.man
+Copy fvwm_icons/*.xpm to /usr/include/X11/pixmaps if you want to.
+Copy fvwm_icons/*.xbm to /usr/include/X11/bitmaps if you want to.
+Copy fvwm_icons/*.bitmap to /usr/include/X11/bitmaps if you want to.
+Copy fvwm_icons/*.icon to /usr/include/X11/bitmaps if you want to.
+
+
+When that's done, you can look at the optional modules in the
+optional directory. These will need to be built one by one. These
+modules are the ones which I believe may depend on the existence of
+software packages or hardware components which may not exist for many
+systems.
+
+
+Rob Nation
+
+

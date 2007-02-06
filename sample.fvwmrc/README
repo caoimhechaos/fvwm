@@ -1,0 +1,10 @@
+This is where I'm collecting .fvwmrc files that people might find useful.
+Mostly, these files cause fvwm to emulate some other window manager.
+
+These are not to be considered finished works. Anyone who can improve them 
+is welcome to, and should send me anything worthwhile
+
+If you use the m4 patches, look into adding undefine(`include')
+just before your iconPath or pixmapPath line.
+
+Rob Nation

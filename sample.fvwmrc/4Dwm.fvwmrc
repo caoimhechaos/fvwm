@@ -1,0 +1,507 @@
+#############################################################################
+#
+# Here's rob's MWM like configuration,
+# with lots of changes to make it more like the Indigo Magic desktop
+# seen on Irix 5.2 machines (i.e. Indies, newer Indigo^2's) by
+# tabaer@magnus.acs.ohio-state.edu.
+
+#
+# (This is actually a set of bug reports masquerading as a sample config)
+#
+# WARNING:  This is as much my personal preference as anything else.
+# The button and menu layout is based on my experiences with SGI
+# machines at Ohio State and NASA-Lewis, so your mileage may vary...
+#  --tabaer@magnus
+#
+# This configuration file expects the following options to be compiled into
+# fvwm:
+#	HOTKEYS
+#	MENUCOLOR
+#	MODULES
+#	SHAPE
+#	XPM
+#
+# Also, the following options SHOULD NOT be enabled:
+#	NO_ICONS
+#	NON_VIRTUAL
+#	PRUNE
+#
+# This config is known to work with fvwm 1.21b, and should work with later
+# versions as well.
+###########################################################################
+
+###########################################################################
+# Set up the major operating modes
+
+# Colors for non-selected windows, menus, and the panner
+StdForeColor 		Black
+StdBackColor 		LightGray
+
+# Colors for the selected window
+HiForeColor 		Yellow
+HiBackColor 		RoyalBlue
+
+# Menu colors
+MenuForeColor	Black
+MenuBackColor	LightGray
+
+# Fonts - one for menus, a second for window titles, and a third for icons
+Font			-*-helvetica-medium-o-*-*-12-*-*-*-*-*-*-*
+WindowFont		-*-helvetica-bold-r-*-*-12-*-*-*-*-*-*-*
+IconFont		-*-helvetica-medium-r-*-*-10-*-*-*-*-*-*-*
+
+# Force SGI-ish Motif compliance
+MWMButtons
+MWMDecorHints
+MWMFunctionHints
+MWMMenus
+BoundaryWidth	6
+NoBoundaryWidth	0
+ButtonStyle 1 50x22
+ButtonStyle 2 50x50
+ButtonStyle 4 22x22
+DecorateTransients
+
+# Set the icon box to be at the top of the screen next to the toolchest
+IconBox 130 5 600 150
+
+# Set the desk top size in units of physical screen size
+# and the reduction scale used for the panner/pager
+DeskTopSize 1x1
+DeskTopScale 32
+
+###########################################################################
+# Set up the Modules
+
+ModulePath /usr/X11/lib/X11/fvwm:/usr/X11/bin:/usr/local/bin
+
+# SGI-ish button bar using GoodStuff
+Module	GoodStuff
+*GoodStuffGeometry +5+5
+*GoodStuffColumns	1
+*GoodStuffFont	-adobe-helvetica-bold-o-*-*-12-*-*-*-*-*-*-*
+*GoodStuffFore	Black
+*GoodStuffBack	LightGray
+# A minor complaint about the GoodStuff button:  the GoodStuff window
+# doesn't size itself width-wise correctly, so it chops off the last letter
+# on a couple of the button labels.  I'd like to see GoodStuff with the
+# button text left-justified and the icons right-justified, like in SGI's
+# toolchest, but I'll have to hack that out myself when I get the time.
+# Perhaps there's a way to set up GoodStuff so that button appearance
+# is configurable, too.  Also, is there any way to get the popup menus to
+# cascade off the buttons, rather than appearing over them? --tabaer@magnus
+#
+#*GoodStuff	Button	Icon	Command
+*GoodStuff	Shells	/home/tabaer/popup.xbm	PopUp	"Shells"	Shells
+*GoodStuff	Windows	/home/tabaer/popup.xbm	PopUp	"Windows"	Windows
+*GoodStuff	Tools	/home/tabaer/popup.xbm	PopUp	"Tools"	Tools
+*GoodStuff	Demos	/home/tabaer/popup.xbm	PopUp	"Demos"	Demos
+*GoodStuff	R-Hosts	/home/tabaer/popup.xbm	PopUp	"R-Hosts"	R-Hosts
+*GoodStuff	System	/home/tabaer/popup.xbm	PopUp	"System"	System
+*GoodStuff	EMACS	/usr/include/X11/xlogo32	Exec	"EMACS"	exec /usr/appl/bin/lemacs-19.10 &
+
+# Irix-5.2 like pager
+Module FvwmPager 0 2
+*FvwmPagerGeometry 135x60+5+675
+*FvwmPagerFore Black
+*FvwmPagerBack LightGray
+*FvwmPagerHilight White
+*FvwmPagerLabel 0 Global
+
+############################################################################
+# Configuration of specific windows using the new Style command
+Style "*"	Icon /usr/include/X11/bitmaps/xlogo32, StartNormal, StartsAnywhere
+Style "Console"	Icon /usr/include/X11/bitmaps/Term
+Style "emacs*"	Icon /usr/include/X11/pixmaps/e/emacs2.xpm
+Style "Fudgit"	Icon /usr/include/X11/pixmaps/g/graphp.xpm
+Style "Fvwm*"	StaysOnTop, Sticky
+Style "ghostview" Icon /usr/include/X11/pixmaps/g/gv.xpm
+Style "Gnuplot"	Icon /usr/include/X11/pixmaps/m/math.xpm
+Style "GoodStuff"	NoIcon, NoTitle, NoHandles, StaysOnTop, Sticky
+Style "News"	Icon /usr/include/X11/pixmaps/mail2.xpm
+Style "oclock"	NoHandles, NoTitle
+Style "RLaB"	Icon /usr/include/X11/pixmaps/m/matrix1.xpm
+Style "rxvt"	Icon /usr/include/X11/bitmaps/Term
+Style "velvet"	Icon /home/tabaer/fem.xbm
+Style "xbiff"	NoTitle
+Style "xclock"	NoTitle, Sticky
+Style "xosview*" NoTitle, Sticky
+Style "XSpread*" 	Icon /usr/include/X11/pixmaps/s/spreadsh.2.xpm
+Style "xterm"	Icon /usr/include/X11/bitmaps/Term
+
+##############################################################################
+# Now define the menus - defer bindings until later
+# The first three menus are very basic and are used in several places.
+# --tabaer@magnus
+
+# This menu is invoked as a sub-menu - it allows you to quit,
+# restart, or switch to another WM.
+Popup "Quit-Verify"
+	Title	"Really Quit Fvwm?"
+	Nop	"This may log you out!"
+	Nop	""
+	Quit	"Yes, Really Quit"
+	Restart "Restart fvwm" fvwm
+	Restart "Start twm"	/usr/bin/X11/twm
+	Restart	"Start olwm"	/usr/openwin/bin/olwm
+	Restart "Start olvwm"	/usr/openwin/bin/olvwm
+	Nop	""
+	Nop	"No, Don't Quit"
+EndPopup
+
+PopUp	"WindowManagers"
+	Restart "Restart fvwm" fvwm
+	Restart "Start twm"	/usr/bin/X11/twm
+	Restart	"Start olwm"	/usr/openwin/bin/olwm
+	Restart "Start olvwm"	/usr/openwin/bin/olvwm
+EndPopUp
+
+# This menu checks to make sure you REALLY want to log out,
+# assuming killing the WM will kick you out of X.
+PopUp	"Logout-Verify"
+	Title	"Do You REALLY want to log out?
+	Nop	""
+	Quit	"Yes, log me out."
+	Nop	"No, cancel that."
+EndPopUp
+
+# The following menus form the bulk of the menu system I have hanging
+# off the GoodStuff modules; they contain most of my commonly used
+# X-based tools.  Note that I use rxvt instead of xterm for most of my
+# shells due to memory constraints; if you use xterms or some variant
+# thereof (aixterm, cxterm, kxterm, etc.) you'll need to change quite
+# a few things.  --tabaer@magnus
+
+# A menu of VT100 size shells
+PopUp	"80x25"
+	Title	"80x25 Shells"
+	Nop	""
+	Exec	"Black on gray"	exec rxvt -geometry 80x25 -fg Black -bg LightGray &
+	Exec	"Black on white"	exec rxvt -geometry 80x25 -fg Black -bg White &
+	Exec	"Gold on black"	exec rxvt -geometry 80x25 -fg gold1 -bg Black &
+	Exec	"Green on black"	exec rxvt -geomtery 80x25 -fg green2 -bg Black &
+	Exec	"White on black"	exec rxvt -geometry 80x25 -fg White -bg Black &
+	Exec	"Yellow on blue"	exec rxvt -geometry 80x25 -fg Yellow -bg Blue &
+EndPopUp
+
+# A menu of slightly larger shells
+PopUp	"80x40"
+	Title	"80x40 Shells"
+	Nop	""
+	Exec	"Black on gray"	exec rxvt -geometry 80x40 -fg Black -bg LightGray &
+	Exec	"Black on white"	exec rxvt -geometry 80x40 -fg Black -bg White &
+	Exec	"Gold on black"	exec rxvt -geometry 80x40 -fg gold1 -bg Black &
+	Exec	"Green on black"	exec rxvt -geometry 80x40 -fg green2 -bg Black &
+	Exec	"White on black"	exec rxvt -geometry 80x40 -fg White -bg Black &
+	Exec	"Yellow on blue"	exec rxvt -geometry 80x40 -fg Yellow -bg Blue &
+EndPopUp
+
+PopUp	"Apps"
+	Title	"Applications"
+	Nop	""
+	Exec	"X Spreadsheet"	exec xspread &
+	Exec	"PostScript Previewer"	exec ghostview &
+	Exec	"Pixmap Previewer"	exec xv &
+EndPopUp
+
+PopUp "AudioDemos"
+	Title	"Audio Demos"
+	Nop	""
+EndPopUp
+
+# All sorts of different time pieces
+PopUp "Clocks"
+	Title	"Clocks"
+	Nop	""
+	Exec	"Analog Clock"	exec xclock -analog &
+	Exec	"Digital Clock"	exec xclock -digital &
+	Exec	"Round Clock"	exec oclock &
+EndPopUp
+
+# A set of NASTY time killers...
+PopUp "Games"
+	Title	"Games"
+	Nop	""
+	Exec	"GnuChess"	exec xboard &
+	Exec	"Lander"	exec xlander &
+	Exec	"Xvier"		exec xvier &
+	Exec	"Doubledeck Solitaire"	exec spider &
+	Exec	"Puzzles"	exec xpuzzle &
+	Exec	"Make 5"	exec xmake5 &
+EndPopUp
+
+PopUp "MiscShells"
+	Title	"Misc. Shells"
+	Nop	""
+	Exec	"Tcl"	exec rxvt -T Tcl -n Tcl -e tclsh &
+	Exec	"TclX"	exec rxvt -T TclX -n TclX -e tcl &
+	Exec	"Wish (Tk)"	exec rxvt -T Tk -n Tk -e wish &
+	Exec	"WishX (TkX)"	exec rxvt -T TkX -n TkX -e wishx &
+EndPopUp
+
+# A menu of various and sundry background graphics on my machine.
+# --tabaer@magnus
+PopUp "Pixmaps"
+	Title	"Backgrounds"
+	Nop	""
+	Exec	"MIT Logo"	exec xsetroot -bg White -fg LightSkyBlue -bitmap /usr/include/X11/bitmaps/mensetmanus &
+	Exec	"X Logo"	exec xsetroot -bg White -fg Black -bitmap /usr/include/X11/bitmaps/xlogo64 &
+	Exec	"Escher Knots"	exec xsetroot -bg LightSkyBlue -fg Black -bitmap /usr/include/X11/bitmaps/escherknot &
+	Exec	"Woman"		exec xsetroot -bg White -fg Black -bitmap /usr/include/X11/bitmaps/woman &
+EndPopUp
+	
+# Several math/science/engineering related applications
+PopUp	"SciEngr"
+	Title	"Science/Engineering"
+	Nop	""
+	Exec	"RLaB"		exec rxvt -T RLaB -n RLaB -e /usr/local/bin/rlab &
+	Exec	"GnuPlot"	exec rxvt -T GnuPlot -n GnuPlot -e /usr/local/bin/gnuplot &
+# I need other stuff here, but that'll come later... --tabaer@magnus
+EndPopUp
+
+# Menu of silly things every X setup should have
+PopUp "Toys"
+	Title	"Toys"
+	Nop	""
+	Exec	"Eyeballs"		exec xeyes &
+	Exec	"Ideal Gases"	exec xgas &
+EndPopUp
+
+# Here are the top-level menus hanging off GoodStuff.  As you'll see,
+# they call other menus a lot.  --tabaer@magnus
+
+PopUp "Shells"
+	Title	"Shells"
+	Nop	""
+	PopUp	"80x25"	80x25
+	PopUp	"80x40"	80x40
+	PopUp	"Misc"	MiscShells
+EndPopUp
+
+PopUp	"Windows"
+	Title	"Windows"
+	Nop	""
+	PopUp	"Set Background"	Pixmaps
+	Nop	"Set Screen Saver"
+	PopUp	"Window Managers"	WindowManagers
+	Nop	""
+	CirculateUp	"Shuffle Up"
+	CirculateDown	"Shuffle Down"
+	Nop	"Tidy Icons (?)"
+	Nop	""
+	Nop	"Restore All (?)"
+	Nop	"Minimize All (?)"
+	Refresh	"Refresh All"
+EndPopUp
+
+PopUp	"Tools"
+	Title	"Tools"
+	Nop	""
+	Exec	"Online Help"	exec /usr/local/tkinfo-0.6/tkinfo &
+	Exec	"Online Manual"	exec xman &
+	PopUp	"Clocks"	Clocks
+	Exec	"Calculator"	exec xcalc &
+	Exec	"Calendar"	exec ical &	
+	Exec	"Clipboard"	exec xclipboard &
+	PopUp	"Engineering Apps."	SciEngr
+	Exec	"Memory Usage"	exec xmem &
+	PopUp	"Misc. Apps."	Apps
+	Exec	"Seyon"	exec seyon -modems /dev/cua1 &
+	Exec	"System Load"	exec xosview -l &
+EndPopUp
+
+PopUp	"Demos"
+	Title	"Demos"
+	Nop	""
+	PopUp	"Audio Demos"	AudioDemos
+	PopUp	"X Demos and Toys"	Toys
+	PopUp	"X Games"	Games
+EndPopUp
+
+PopUp	"R-Hosts"
+	Title "Remote Hosts"
+	Nop	""
+	Exec	"Archie"	exec xarchie &
+	Exec	"World-Wide Web"	exec /usr/local/bin/chimera &
+	Exec	"News"	exec rxvt -T News -i News -e /usr/local/bin/trn &
+EndPopUp
+
+PopUp	"System"
+	Title "System
+	Nop	""
+	Exec	"Lock Terminal"	exec xlock -mode random &
+	Nop	""
+	PopUp	"Log Out"	Logout-Verify
+EndPopUp
+
+# The next few menus are mostly used in the root window.  They control
+# basic things like window placement, iconification, and logging out.
+# --tabaer@magnus
+	
+# This defines the most common window operations
+# As with the key bindings (see below), these were appropriated from
+# a stock SGI .4Dwmrc file
+Popup "Window Ops"
+# I'm not 100% sure what the "Restore" option is supposed to do in stock
+# mwm/4Dwm, or if there's an equivalent in fvwm.  Right now I just have
+# Restore defined the same as (De)Iconify.  --tabaer@magnus
+	Iconify	"Restore  (Alt-F5)"
+	Move	"Move     (Alt-F7)"
+	Resize	"Resize   (Alt-F8)"
+	Iconify	"Minimize (Alt-F9)"
+	Maximize	"Maximize (Alt-F10)"
+	Raise	"Raise    (Alt-F1)"
+	Lower	"Lower    (Alt-F3)"
+	WindowList	"WinList  (Alt-F6)"
+	Nop	""
+	Destroy	"Close    (Alt-F4)"
+	Delete	"Quit     (Alt-F2)"
+EndPopup
+
+# 4dwm-ish root window menu
+PopUp "RootMenu"
+	Title	"FVWM"
+	Nop	""
+	Exec	"Lock Terminal"	exec xlock -mode random &
+	PopUp	"Log Out"	Logout-Verify
+EndPopUp
+
+#4dwm-ish long root window
+PopUp "LongRootMenu"
+	Title	"FVWM"
+	Nop	""
+	Exec	"New Window"	exec rxvt &
+	CirculateUp	"Shuffle Up"
+	CirculateDown	"Shuffle Down"
+	Nop	"Tidy Icons (?)"
+	Nop	"Restore All (?)"
+	Refresh	"Refresh All"
+	Nop	""
+	Restart	"Restart fvwm"	fvwm
+	PopUp	"Quit fvwm"	Quit-Verify
+	Nop	""
+	Exec	"Lock Terminal"	exec xlock -mode random &
+	PopUp	"Log Out"	Logout-Verify
+EndPopUp
+
+############################################################################
+# Now define some handy complex functions
+
+# This one moves the window if you drag the mouse, raises the window if you
+# click,  or does a RaiseLower if you double-click
+Function "Move-or-Raise"
+	Move 		"Motion"
+#	Raise		"Motion"
+	Raise		"Click"
+	RaiseLower	"DoubleClick" 
+EndFunction
+
+# This one moves and then lowers the window if you drag the mouse,
+# only lowers the window if you click,  or does a RaiseLower if you double 
+# click
+Function "Move-or-Lower"
+	Move 		"Motion"
+	Lower		"Motion"
+	Lower		"Click"
+	RaiseLower	"DoubleClick"
+EndFunction
+
+# This one resizes and then raises the window if you drag the mouse,
+# only raises the window if you click,  or does a RaiseLower if you double 
+# click
+Function "Resize-or-Raise"
+	Resize 		"Motion"
+	Raise		"Motion"
+	Raise		"Click"
+	RaiseLower	"DoubleClick"
+EndFunction
+
+Function "Move-or-Iconify"
+	Move 		"Motion"
+	PopUp		"Click" Window Ops
+	Iconify		"DoubleClick"
+EndFunction
+
+# This does the Motif thing of killing the window when you
+# double-click the top left button.  --tabaer@magnus
+Function "Die-on-DoubleClick"
+	Destroy		"DoubleClick"
+	PopUp		"Click"	Window Ops
+EndFunction
+
+##############################################################################
+# This defines the mouse bindings
+
+# First, for the mouse in the root window
+# I use the AnyModifier option for the modifier field, so you can hold down
+# any shift-control-whatever combination you want!
+
+#     Button	Context Modifi 	Function
+Mouse 1		R   	A       PopUp "LongRootMenu"
+# Mouse button 2 calls up the Tools menu in case GoodStuff doesn't work
+Mouse 2		R    	A      	PopUp "Tools"
+Mouse 3		R    	A      	PopUp "RootMenu"
+
+# Now the title bar buttons
+# Any button in the left title-bar button gives the window ops menu
+# Any button in the right title-bar button Iconifies the window
+# Note the use of "Mouse 0" for AnyButton.
+
+#     Button	Context Modifi 	Function
+Mouse 0		1    	A      	Function "Die-on-DoubleClick"
+Mouse 0		2    	A     	Maximize
+Mouse 0		4    	A     	Iconify
+
+# Now the rest of the frame
+# Here I invoke my complex functions for Move-or-lower, Move-or-raise,
+# and Resize-or-Raise. 
+# Button 1 in the corner pieces, with any modifiers, gives resize or raise
+Mouse 1		FS	A	Function "Resize-or-Raise"
+Mouse 2		FS	A	Function "Resize-or-Raise"
+Mouse 1         T	A	Function "Move-or-Raise"
+Mouse 2         T	A	Function "Move-or-Raise"
+Mouse 1		I	A	Function "Move-or-Iconify"
+Mouse 2		I	A	Function "Move-or-Iconify"
+
+############################################################################
+# Now some keyboard shortcuts.
+
+# press arrow in the root window, and move the pointer by 1% of a page
+Key Left	R	N	CursorMove -1 0
+Key Right	R	N	CursorMove +1 +0
+Key Up		R	N	CursorMove +0 -1
+Key Down	R	N	CursorMove +0 +1
+
+# press shift arrow anywhere, and move the pointer by 5% of a page
+Key Left	A	S	CursorMove -5 0
+Key Right	A	S	CursorMove +5 +0
+Key Up		A	S	CursorMove +0 -5
+Key Down	A	S	CursorMove +0 +5
+
+# press shift arrow + control key, and move the pointer by 10% of a page
+Key Left	A	SC	CursorMove -10 +0
+Key Right	A	SC	CursorMove +10 +0
+Key Up		A	SC	CursorMove +0   -10
+Key Down	A	SC	CursorMove +0   +10
+
+# press shift arrow + meta key, and move the pointer by 20% of a page
+Key Left	A	SM	CursorMove -20 +0
+Key Right	A	SM	CursorMove +20 +0
+Key Up		A	SM	CursorMove +0   -20
+Key Down	A	SM	CursorMove +0   +20
+
+# Keyboard accelerators
+# These are "borrowed" from the .4Dwmrc file on an SGI I use,
+# except for AltF2 and AltF6 which I added for completeness.
+# I think the other are standard Motif.  --tabaer@magnus
+Key F1		WFST	M	Raise
+Key F2		WFST	M	Delete
+Key F3		WFST	M	Lower
+Key F4		WFST	M	Destroy
+Key F5		WFST	M	Raise
+Key F6		A	M	WindowList
+Key F7		WFST	M	Move
+Key F8		WFST	M	Resize
+Key F9		WFST	M	Iconify
+Key F10		WFST	M	Maximize
+

@@ -1,0 +1,1568 @@
+q to r
+      1. Fixed blatant GoodStuff boo-boo, with the 'Swallow' command.
+
+p to q
+      1. Fixed bug in Move/Resize with coordinates specified, when
+         accessed through modules.
+      2. Prohibited zero width/height windows, which are nasty.
+      3. Fixed error caused by HandleWidth = 0. The error was:
+            fvwm: internal error
+	    Request 1, Error 2
+	    EventType: 20
+	 This should look familiar to some people.
+      4. Added FvwmAuto, and auto-raise module which will replace
+         built in auto-raise in future versions. Built in
+         auto-raise is still there, but the module works better!
+      5. Thought about adding m4_read module, but this can't be
+         done under the fvwm-1.xxx system, because of the distinction
+	 between configuration commands and built-in commands.
+
+o to p 
+      1. Minor patch to Circulate functions
+      2. Removed button-stays-depressed feature from the sample .fvwmrc
+         files. No changes to the source code, I just removed the qouted
+	 part of the Exec expressions. It seems that people can't read or
+         understand the man page:
+
+          If command is an fvwm Exec  command,  then  the  button
+          will  remain  pushed  in  until  a window whose name or
+          class matches the qouted  portion  of  the  command  is
+          encountered.  This  is intended to provide visual feed-
+          back to the user that the action he has requested  will
+          be performed. If the qouted portion contains no charac-
+          ters, then the button will pop out  immediately.   Note
+          that  users  can  continue pressing the button, and re-
+          executing the command, even when it looks "pressed in."
+
+      3. Removed my e-mail address from everything.
+         
+n to o
+      1. Fixed:
+             a. raising of no-title icons
+	     b. CirculateDown enters an infinite loop
+             c. command line argument -w <number> was interpreted
+	        as -workspace <number> for application programs.
+
+m to n
+      1. minor colormap fixup
+      2. minor restart fixup.
+
+l to m
+       1. Fixed a problem where de-iconified windows don't always
+          end up on top.
+
+k to l
+       1. Removed a debugging printf
+       2. Restored pager.c which got abused during a disk-space crunch.
+
+j to k
+       1. Fixes (?) for Move
+i to j
+       1. Fixed bug in FvwmPager
+       2. Made Click-to-focus work with CapsLock on.
+
+h to i
+       1. Miscellaneous little things
+                 Top level imakefile fixed up
+		 fixed a few small errors.
+
+g to h 
+       1. Mailing List changed
+            To subscribe:
+
+            mail to majordomo@wonderland.org with the body of the message:
+
+            subscribe fvwm
+
+            That's all there is to it.  To send to the list, mail to 
+            fvwm@wonderland.org.
+       2. Fixed the icon-label-disappears-after-move problem
+       3. Added optional arguments to resize, just like move.
+       4. Updated man page to reflect changes for versions g & h.
+f to g
+       1. Fixed core-dump from FvwmBacker.
+       2. Added (but didn't test much) a feature where you can
+          specify arguments to Scroll, movecursor, and maximize
+	  in either percent-of-screen-size (as before) or in pixels.
+	  Example
+	  Scroll  10 10
+	  Scroll  50p 50p
+
+	  The first goes 10 percent of the screen in each direction, the
+	  second goes 50 pixels. You can mix, ie
+	  Scroll 10 50p
+	  which does "Scroll 10 percent left, 50 pixels down.
+	  
+       3. Gave Move optional arguments, to specify where to move to
+          arguments can be in pixels or percent of screen-size, like
+          the other commands above.
+
+e to f
+       1. Switched from XFetchName to XGetWMName,
+          in deference to motif 1.2 (? bug report)
+       2. Kept the FvwmPager from allowing you to move windows
+          into never-never land (in the title region).
+       3. When selecting a window in the WIndowList, fvwm
+          makes sure that the window is visible at the end.
+
+d to e
+       1. fixed some bugs associated with (c)
+       2. Added quick-restart, which ain't so quick, but may 
+          lead to something
+c to d
+       1. Futzed with #ifdefs a lot.
+
+1.24b to c
+       1. Kept moving common subroutines in the library.
+1.24 to 1.24b
+       1. Renamed strncasecmp, strcasecmp, gethostname to avoid
+          potential conflicts with OS provided functions.
+
+1.23f to 1.24
+       1. Create libs subdirectory.
+          Inserted (in libs directory) code for 
+	        strncasecmp, strcasecmp, gethostname, CatString3,
+		SendInfo, SendText.
+          Removed ifdef's aroung strncasecmp, strcasecmp, gethostname.
+	  Everyone uses the fvwm version now, I hope!
+	  
+	2. Skipped 1.23f to 1.23z so that everyone will think that big
+	   progress has been made, and will upgrade.
+
+	3. Time to get rid of #ifdef PRUNE ? Soon I think!
+
+1.23e to f
+        1. Applied a few patches
+	     A. fvwm man patch m4 stuff
+	     B. FvwmIconBox
+1.23d to 1.23e
+	1. Made mouse and button operations insensitive to the 
+	   position of the caps-lock key. It use to be sensitive if
+	   modifier was not AnyModifier. We all know that true unix
+	   users typically break off the useless caps-lock key before
+	   turning on the computer, but this seems to be an improvement
+	   in useability anyway.
+
+1.23c to 1.23d
+	1. Remove the configure.h options
+		NEEDS_SIGCHLD
+	   and
+		UNION_WAIT
+	   fvwm now NEVER traps SIGCHLD, but ALWAYS
+	   waits() for dead children. Maybe it'll even work.
+
+	   Tried it on SunOS 4.1.3 and Solaris 2.3 and OSF/1
+        2. Incorportated M4 patches.
+
+1.23b to 1.23c
+	1. Applied various patches:
+		1. FvwmIconBox patch #6. Something to do with windows
+		   that change their icons.
+		2. Using the built-in windowlist on a window which is
+		   on another desk and iconified now causes
+		   a switch to that windows desk, instead of bringing
+		   the window to the current desk.
+		3. Patch to eliminate some errors from GoodStuff while
+		   it terminates.
+	2. Made fvwm grab the X-server during desktop changes. This
+	   keeps windows from redrawing themselves as they are (briefly)
+	   exposed, and makes the desktop change feel much faster.
+           Even better would be to move windows in a stacking-order
+           sensitive manner.
+
+	3. Made CirculateUp, CirculateDown, and Warp accept wildcards in
+	   the name-to-match field. Also allowed these functions to warp/
+	   circulate to globally-active-focus model windows which were 
+           incorrectly prohibited before.
+	
+1.23 to 1.23b
+	1. Applied patches for the m4 / GNU m4 problem
+	2. Applied patch for MWMButtons with new NoButton stuff.
+	3. remove xpm.h from the distribution, since there are at least
+	   two incompatible versions of xpm out there. References are now
+	   <X11/xpm.h>, so you can put your copy in /usr/include/X11/xpm.h
+        4. Fixed malloc(0) problem in FvwmFileMgr.
+
+z.1 to 1.23
+	1. Applied m4 patches.
+	2. Applied some FvwmIconBox patchs
+	3. Applied GNU m4 patches
+	4. Applied the NoButton and ButtonStyle extension patches.
+	5. Fixed the problem "Warp skips over icons if NoIcons is set".	
+1.22z to z.1
+	1. Fixed up the Imakefile to reasonably allow
+	   installation into a non-standard directory. Tried it too.
+
+y to z
+	1. Fiddled with the errno return values when writing to pipes.
+ 
+x to y
+	1. Fixed click-to-focus mode.
+	2. Added FvwmSaveDesk module
+
+w to x  
+	1. Allow negative auto-raise delays to suppress the
+	   raise-on-focus behavior of click-to-focus mode.
+	2. Fixed (?) GoodStuff for ALphas
+	3. Modified module-interface code to speed it up (maybe).
+v to w
+	1. Added some dead-child reaping changes.
+	2. Completely fixed fvwm-to-module communications.
+u to v.
+	1. Added Set_Mask command for modules to set their message mask
+	   which will reduce unneeded traffic into the pipes.
+	   Updated GoodStuff and FvwmPager to use the new feature.
+
+t to u.
+	1. Added some FvwmIconBox changes.
+	2. Fiddled with Fvwm-to-module communications a bit.
+
+s to t
+	1. Incorporated the NoIconTitle patches. You can add a style
+	    Style "xmag" NoIconTitle, Icon magnifying_glass2.xpm
+	2. Added the very nice FvwmIconBox module. I've switched to it 
+	   myself. (Actually, I swallowed it into an 8x2
+	   GoodStuff, which is pretty cool).
+	3. Made FvwmScroll scrollbars look and function like the
+	   FvwmIconBox scroll-bars.
+r to s
+	1. Add the built-in Close, a hybrid of Delete and Destroy, which
+	   probably mimics OpenWindows and MWM's close function.
+
+q to r
+	1. Made FvwmFileManager handle icons that it can't find.
+
+p to q
+	1. Small fix with regards to starting a window on a specific
+	   desk and then quickly changing desks.
+	2. Loss-of-focus-after-iconifying bug fixed (?)
+	3. Added ForeColor and BackColor styles to supplement Color, since the
+	   choice of "/" as a fore/back color seperator turns out
+	   to be poor.
+
+1.22o to p
+	1. Bug (?) fixed which affected multi-screen support.	
+	   Probably explains reports of gradual loss of functionality
+	   when used on multi-screen displays.
+	2. Altered icon-move code:
+		a. Unmaps the icon-label window during an opaque
+	           icon move, if there is a pixmap.
+		b. Unmaps the entire icon during a non-opaque move.
+	   These are really for the FvwmFileManager, and can be
+	   changed back if deemed inappropriate.
+	3. Added an XAllowEvents to WaitForButtonsUp(),
+	   in case that was causing lock-ups.
+
+1.22n to o
+	1. Bug fixes for FvwmFileMgr.
+
+1.22m to n
+	1. Lots of FvwmFileMgr changes. Its now pretty useable, although
+	   sluggish at times.
+	   Read the README in the source directory.
+1.22l to m
+	1. Still More fixes for big buttons in GoodStuff
+	2. More upgrades to FvwmFileMgr.
+
+1.22k to 1.22l
+	1. More fixes for big buttons in GoodStuff
+	2. Upgrades to FvwmFileMgr. Now it periodically
+	   refreshes its directory contents, also alphabetizes the files.
+
+1.22j to 1.22k
+	1. Fixed an over-lap problem with SmartPlacement
+	2. Fixed up big button shuffling in GoodStuff (a little)
+	3. Added the preliminary FvwmFileManager. Don't send bug reports,
+	   its only a veryveryvery preliminary version.
+
+1.22i to 1.22j
+	1. Attempt to fix problem with zombies from swallowed windows
+	   by forcing fvwm to do ReapChildren() on start-up and
+	   exit.
+	2. Fixed a very obscure bug relating to handling of windows
+	   that map and unmap themselves a lot.
+	3. Fixed a bug in random-placement, where "off-screen" windows
+	   weren't detected quite right.
+	4. Incorporated the latest FvwmWinList patches.
+1.22h to 1.22i
+	1.Fi xed auto-raise for small time-out values.
+	2. Converted val1 and val2 in the menu-structure to
+	   longs for the Alphas out there.
+	3. Changed FvwmWinList to give black shadows on monochrome systems.
+	4. Improved GoodStuff's handling of multi-width/height buttons
+1.22g to 1.22h
+	1. Added stuff to GoodStuff.
+		a. Multi-width/height butttons
+		b. Swallowed modules
+		c. Selective omission of button titles
+		   (not yet smart enough to change window size
+		    accordingly).
+	   Look in system.fvwmrc for an example.
+
+1.22f to 1.22g
+	1. Added support for starting applications on a specific
+	   desk by specifying the command line flag:
+	   -xrm "*Desk:1" or whatever. Works for some apps like
+	   xterm, xfontsel, but not for others, like rxvt, xclock. This
+	   code was a patch which I believe was lifted from ctwm.
+
+1.22e to 1.22f
+	1. Fixed F_RAISE_IT by merging with F_FOCUS
+1.22d to e
+	1. Made GoodStuff do a constrained resize when it swallows windows.
+	2. Updated mwm.fvwmrc and 4Dwm.fvwmrc samples.
+	3. Fixed the 1-pixel width/height error that pervaded fvwm.
+	   It was just that the base-width/height was assumed to be 1, not
+	   zero, if the application didn't supply it.
+1.22c to d
+        1. Fixed a minor focus bug, a few other little odds and ends.
+	
+1.22b to 1.22c
+	1. Fixed some configure.c errors were options were incorrectly
+           left out 
+	2. Fixed the "swallow" bug in goodstuff that only shows up
+	   if you specify a valid pixmap and expect it to be
+	   covered by your swallowed window. Why would anyone do
+	   that anyway???!!
+	3. Fixed(?) the loss-of-focus problem (click-to-focus mode) when a new
+	   window is mapped that doesn't want focus. This was not really
+ 	   a bug in the first place.
+	4. Fixed FvwmPager error when an icon which has the focus is 
+	   de-iconified
+	5. Fixed sample.fvwmrc to parse colors correctly. You need to
+	   make sure that styles are defined before any functions or
+	   menus, and before the internal pager is started.
+
+1.22 to 1.22b
+	1. Fixed various minor stuff, mostly with pager, and a few
+	   cross-platform compatibility things.
+	2. Added StartIconic/StartNormal to the style command.
+	3. Added per-window border colors via the Style command:
+		Style "*"  BorderWidth 5, HandleWidth 5, Color Black/#60a0c0
+		Style "rxvt"  Icon term.xpm, Color black/grey
+	   Could use this to replace the StdForeColor/StdBackColor options.
+
+1.21zo to 1.22
+	1. Fixed minor focus problem: when an attempt was made
+	   to give focus to a window that won't take it, the focus was
+	   left on (I think) window None, ie keyboard input was lost, and 
+	   keyboard shortcuts failed.
+	2. Fixed some bugs in the FvwmPager and other modules.
+	3. Fixed case where moving an icon across desks in the pager didn't
+	   work quite right.
+1.21zn to zo
+	1. Added special functions
+		InitFunction
+		RestartFunction
+           which are executed on start-up or restarts.
+	2. Addressed click-to-focus focus queue manipulation when
+	   warp and circulate up/down commands are used.
+	3. Added some potential improvements for colormap handling.
+	4. Added the Wait builtin to make InitFunction more useful.
+1.21zm to zn
+	1. Added BorderWidth and HandleWidth to style command.
+		---> replaces BoundaryWidth and NoBoundaryWidth
+		     commands & adds flexibility.
+	2. Ifdef'd out old style-setting code
+		---> #ifndef PRUNE
+	3. FIxed error in wild-card matching for trailing "*",
+	   in case where the trailing * needs to match a null-string.
+1.21zl to 1.21zm
+	1. Added opposite behaviors to Style:
+	   Title, Handles, StaysPut, Slippery, CirculateHit,
+	   WindowListHit, StartsAnywhere. You can now change default
+	   fvwm behavior with Style "*" ....
+	   and then re-enable properties on specific windows as desired.
+	2. Made Style "*" Icon unknown1.xpm
+	   set the default icon, used only after a windows
+	   built-in icons are checked.
+	3. Added NoIcon option for style. Also, Icon attribute without
+	   an argument undows the NoIcon attribute without specifying a window,
+	   so
+		Style "*" NoIcon
+		Style "Fvwm Pager" Icon
+	   allows only the FvwmPager module's built-in icon to appear.
+	4. Fixed a few minor bugs in Style.
+
+1.21zk to zl
+	1. Fixed man page for Focus built-in. Focus does not
+	   de-iconify.
+	2. Built-in pager is no longer automatically sticky.
+	3. Added the Style command. Not finished, but fully
+	   functional. The default Icon handling with Style is
+	   bad, so we still need the old default icon command. No
+	   new capabilities have been added at this time.
+
+1.21zj to zk
+	1. Fixed some bugs in FvwmScroll
+	2. Removed all use of CurrentTime in focus control.
+	   (Use propertyNotify events for click-to-focus when first
+           mapping a new window).
+	3. Remove symlinks from source tree
+1.21zi to 1.21zj
+	1. Added wild-card parsing to NoTitle, Sticky, 
+	   NoBorder, Icon, WindowListSkip, and StartsOnDesk. Neat.
+	   Cuts down on .fvwmrc entries. Added it to FvwmWinList too.
+
+1.21zh to 1.21zi
+	1. Fixed Keyboard shortcuts in DeferExecution.
+	2. Added FvwmScroll module.
+1.21zg to 1.21zh
+	1. Fixed border drawing code to look OK for any width
+	   of border from 0 up. BoundaryWidth 0 really gives no
+	   boundary at all. BoundaryWidth 1 or 2 gives a solid
+	   shadow-color boundary.
+	2. Incorporated patches to add a seperate menu fore and back
+	   color, and a menu-stipple color for the shaded out entries in
+	   window menus. All this is conditional on #ifdef MENUCOLOR.
+	   Need to add:
+		MenuForeColor           Black
+		MenuBackColor           grey
+		MenuStippleColor        SlateGrey
+	   to .fvwmrc.
+
+1.21zf to 1.21zg
+	1. Fixed pager for monochrome mode (ignores user colors).
+	2. Adjusted fonts, border widths, etc of the default 
+	   system.fvwmrc
+
+ze to zf
+	1. Fixed minor error in pager geometries.
+
+1.21zd to ze
+	1. Fixed the problem of vestigial decorations for swallowed
+	   windows.
+	2. Made NoBoundaryWidth 0 actually give a boundary-width of zero.
+1.21zc to 1.21zd
+	1. Added "swallow" to GoodStuff
+
+1.21zb to 1.21zc
+	1. Colormap handling changes.
+
+1.21za to 1.21zb
+	1. A couple of residual focus-on-root patches.
+	2. Minor tweak to FvwmWinList, replacing c==' '
+	   with isspace(c)
+	3. XSendEvent at the end of HandleButtonPress needed 
+	   a little extra filtering.
+
+1.21z to 1.21za
+	1. Appied still more patches about unions status wait....
+	2. Updated 4Dwm.fvwmrc
+	3. Switched to FvwmWinList version 0.4. Made some minor tweaks to
+	   FvwmWinList in the process.
+
+1.21y to 1.21z
+	1. Added HOSTDISPLAY enviroment variable; should be a network
+	    ready version of DISPLAY
+	2. Added SloppyFocus, which works like the default focus-follows-
+	   mouse, except that focus stays witht the window until you enter
+	   a new window.
+	
+1.21w to 1.21 y
+	1. Fixed up LookInList, so that
+		Sticky xbiff
+		Notitle XBiff
+	   will have the expected result. Note: this is not making
+	   the string comparison case-insensitive, but is performing an
+	   exhaustive search for matches, instead of stopping at the first
+	   match.
+	2. Gave GoodStuff buttons that can remain pushed in until
+	   an application actually materializes. In Exec commands,
+	   the qouted portion of the command will be compared to
+	   names and classes of new windows, until a match is found,
+	   then the button will be release. Qouting an empty string
+	   will restore the original behavior.
+	   
+	   This needs to be extended: it should be possible for a 
+	   button to remain pushed in until the application dies,
+	   or to grab the application icons, or to grab the application
+	   window itself (for xclock, xbiff).
+
+
+1.21v to 1.21w
+	1. Fixed focus-on-warping problem.
+	2. Fixed StickyIcons in new FvwmPager
+	3. Fixed circulate up/down handling of windows that don't
+	   accept focus
+1.21u to 1.21v
+	1. Added built-in Focus for use by FvwmWinList
+	2. Made fvwm ungrab the pointer just prior to
+	   invoking a module. Allows modules to do natural
+	   pop-up menus if desired.
+
+1.21t to 1.21u
+	1. Added FvwmPager code to detect
+		*FvwmPagerFont none
+	   which causes the desktop-labels to be omitted.
+	2. Added FvwmPagerRows and FvwmPagerColumns
+1.21s to 1.21t
+	1. Remove most of HandleLeaveNotify, since it caused occasional
+	   focus loss.
+	2. Cleaned up colormap focusing
+	3. Added StartIconic and IconGeometry
+	   to FvwmPager. Needs a little work
+	   still.
+	4. Updated FvwmWinList to ver 0.3
+	5. Fixed up focusing for click-to-focus and colormap
+	   handling.
+	
+1.21r to 1.21s
+	1. Applied patch to FvwmWinList
+	2. Changed comment delimiter from ## to
+	   /* */ in Imakefiles.
+
+1.21q to 1.21r
+	1. Beat up on the makefile and configure.h
+	2. Added AppsBackingStore, SaveUnders, and
+	   BackingStore as run-time options. They
+	   used to be compile time.
+	3. Remove NO_MORE_COLORS compile time
+	   option.
+	4. Made LENIENCE a run time option.
+	5. Fixed the focus-on-root problem
+
+
+1.21p to 1.21q
+	1. Added FvwmWinList
+1.21o to 1.21p
+	1. Big clean up for focus control. Completely
+	   eliminated CheckAndSetFocus().
+	2. Big time, really stupid and quite serious bug in My_XNextEvent
+	   was fixed. This caused some events to be skipped, and others
+	   to be processed twice.
+	3. FvwmPager now has a "current desk only" pager for an icon.
+	   If you have a line like 
+		Icon "Fvwm Pager"   map.xpm       
+	   get rid of it! This icon does not yet allow you to move windows
+	   or viewports.
+	4. Iconic view of the pager now also allows the user to
+	   move windows and viewports within the icon.
+	5. Can now drag windows out of the pager onto the
+	   desktop for final placement.
+
+1.21m to 1.21o
+	1. Fixed some segmentation faults
+	2. Fixed Raise operation with no on-top windows.
+	3. Cleaned up sample config files.
+
+1.21l to 1.21m 
+	1. Fixed focusing problems caused by sometimes processing
+	   events out of order.
+	2. Split M_ICONIFY module message into M_ICONIFY and
+	   M_ICON_LOCATION.
+	3. Fixed up pager for monochrome user
+	4. Added window-labels to the new pager.
+
+1.21k to 1.21l
+	1. Improved handling of ONTOP windows, so they
+	   no longer fight each other for top-billing. Also,
+	   a window-manager induced raise will not briefly raise
+	   the target window above the ONTOP's.
+	2. Gave the FvwmPager the ability to move keyboard
+	   focus to a window which you select by clicking with
+	   button 2. Focus can only be given to 
+	   windows on the current desk.
+
+1.21h to 1.21k
+	1. Made FvwmPager understand initial stacking order
+	2. made windows stay on desk when de-iconifying.
+1.21g to 1.21h
+	1. Added the built-in WindowsDesk to move a window to
+	   another desk, without having to go through
+	   the stick-changedesks-unstick process. Made the
+	   pager module use this option.
+	2. Added a man pager for FvwmPager and an FvwmPagerLabel
+	   command.
+1.21e to 1.21g
+	1. Fixed a focusing bug. Seems to affect motif windows.
+	2. Got the new FvwmPager module mostly written. People
+	   can try it out, but there's no man page yet.
+	   It lets you drag windows between desktops, and you can
+	   see all desktops at once. The B&W mode isn't done, and
+	   window-labels don't show up in the pager. Also,
+	   the move-windows-between desktops is clumsy.
+1.21e to 1.21f
+	1. Make AddToList case sensitive, since re-extracting
+	   info is case sensitive. May have a small effect on
+	   config files.
+        2. Modified the re-start procedure so that it was more
+	   reliable for some people.
+	3. Started writing a pager module. Its not done, so
+	   don't bother with it yet.
+
+1.21d to 1.21e
+        1. Changed smart-placement grid from 10 pixels to 3
+	2. Changed mapping/unmapping scheme for multi-desktop
+	   operation. I had noticed a problem, triggered as
+	   follows.
+	   1. Set StartOnDesk Maker 2
+	   2. Start Frame-maker 4.0
+	   3. Wait for startup screen.
+	   4. immediately change desks.
+	   5. Wait for the top-level buttons for framemaker to
+	      show up.
+	   6. While fvwm switches back to the frame-maker desk, trying
+	      to map the frame-maker buttons, the initialization
+	      screen tries to unmap itself.
+	   7. fvwm got confused, and left an undecorated init
+	      screen displayed, which frame-maker thought was unmapped.
+	   Solution: when changing desks, only unmap the parent, not
+                     the window itself. This means that windows don't know
+		     they were removed from the screen.
+	3. Changed time stamp for XSetInputFocus from CurrentTime to
+	   lastEventTime, to be more ICCCM compliant.
+
+		     
+1.21c to 1.21d
+	1. Added MWMHintOverride.
+	   I suppose this should open a dialog box to confirm the
+	   override before actually proceding. Maybe some day....
+	   
+1.21b to 1.21c
+        1. Fixed the problem of sending 2 de-iconify messages to
+	   modules.
+	2. Added FvwmSound in the optional directory.
+	3. Got smart about m4 pre-processing and modules. The m4-processed
+	   .fvwmrc file is saved in /tmp for use by modules.
+	   Modules are passed the name of the pre-processed file
+	   (/tmp/fvwmrcXXXXX) to read. File is delete on exit from fvwm.
+	4. Fixed a border-width error in smart-placement.
+
+1.21 to 1.21b
+	1. Fixed bitmap handling in revised GoodStuff module.
+	   (Used to fail with BadMatch).
+	2. Changed a few instances of FvwmInitBanner to FvwmBanner.
+
+
+1.20z to 1.21
+	1. Finished conversion to 14 or less character file names.
+	   Unfortunately, module names are changed:
+		FvmInitBanner ->FvwmBanner
+		FvwmNoClutter ->FvwmClutter
+		FvwmModuleDebugger ->FvwmDebug
+		FvwmIdentify -> FvwmIdent
+		FvwmSaveDesktop -> FvwmSave
+ 	   For existing sites with >14 character file names,
+	   these changes could be addressed with a handful of
+	   links in the /usr/lib/X11/fvwm directory, if desired.
+
+	2. Tidied up a little code in fvwm itself, created
+	   colormaps.c to handle colormap switching code, moved
+	   Iconify and DeIconify into icons.c, and move all window-placement
+	   code into placement.c
+
+1.20y to 1.20z
+	1. Fixed icon-desktop selection. Particularly affected
+	   restarts with icons on desks other than the
+	   current desk.
+	2. Started shortening files names that are more than 14
+	   characters. I only did the easy stuff so far.
+	3. Ammended Module calling sequence to pass one user-specified
+	   command line argument. 
+
+	   This argument is the entire
+	   body of the Module command line in the .fvwmrc file,
+	   after the actual name of the module. It may contain
+	   spaces, qoutes, whatever. For example, in:
+		Module	"FvwmIdentify"	FvwmIdentify Hello rob! -fg purple
+	   the argument would be "Hello rob! -fg purple" all passed in
+	   argv[6]. Of course, no modules use  this option yet.
+
+1.20w to 1.20y
+	1. Fixed qouting problem in FvwmSaveDesktop.
+	2. Fixed one really stupid bug, and made improvements in
+	   GoodStuff to reduce re-draw frequency. Should be much
+	   better now.
+	3. Added the PagingDefault patches.
+
+1.20v to 1.20w
+	1. Fixed seg fault on second-level pop-ups, as reported in the
+	   mail channel
+	2. Fixed colormap handling, at least enough to run
+	   toolchest on SGI's
+
+1.20u to 1.20v
+	1. Improved complex functions a bit:
+		a. Can now have 
+			Function "Move-or-Raise"
+			        Raise           "Motion"
+			        Move            "Motion"
+			        Raise           "Click"
+			        RaiseLower      "DoubleClick"
+			EndFunction
+		   which used to fail unless the move was done first.
+		b. Now detect motion by a pointer movement of
+		   5 pixels or greater, or by expiration of
+		   click-time, whichever occurs first. Delays waiting
+		   to decide on whether an event is a click or motion should
+		   be minimized.
+		c. Can now bind complex functions to the root window,
+		   AS LONG AS NO BUILT-IN IN THE FUNCTION REQUIRES A
+		   TARGET WINDOW. This will typically be used to create
+		   menus that stay up after a click:
+			Function "StickyMenu"
+				PopUp "Motion"	MyMenu
+				PopUp "Click"   MyMenu
+			EndFunction
+		   or to overload a mouse button:
+			Function "Overload"
+				PopUp "Motion" Menu1
+				PopUp "Click"  Menu2
+				WindowLost "DoubleClick"
+			EndFunction
+		   this should provide a superior user interface for people
+		   with only one or two mouse buttons (mostly macintosh and
+		   PC people, I guess).
+	2. Made the pager update during moves and resizes only after the window
+	   in the pager moves 2 or more pixels. This should improve interactive
+	   response. GoodStuff needs some big-time clean up for opaque
+	    move users, though.
+
+
+1.20s to 1.20u
+	1. Added some extra support for keeping transients on the same
+	   desk as their parents, and for keeping window groups together.
+	2. Added a minor correction. If a transient was unmapped because
+	   its parent was iconified, the pager was not getting updated
+	    correctly
+1.20p to 1.20s
+	1. Added support for interpreting the mwm-hints functions field
+	   not all done yet.
+	2. Added MWMFunctionHints
+	3. Added resize-on-window-placement, remove now uneeded FvwmResizeModule
+	   Resize is triggered twm style (pressing button 2) if MWMMenus
+	   is not selected. Triggering is mwm style (shift-button 1) if
+	   MWMMenus is selected.
+	4. Added StartsOnDesk, and patches to remember desktop
+	   number of windows through re-starts. (Thanks to
+	   Mr. Miyamae miya@pen214.prod.cpg.sony.co.jp)
+	5. Improved reliability of FetchWMProtocols, which is used
+           to scan for WM_DELETE_WINDOW and WM_TAKES_FOCUS
+	6. Made Add_window switch to desktop of new window before
+	   popping up the outline.
+	7. Fixed operation for Sun's Wabi, running on a solaris 2
+	   machine, display on a xterm, fvwm running on SunOS4.1.3.
+
+	   Problems included focusing and colormap obnoxiousness by fvwm.
+
+	   Looks good now, only tried wabi itself, since I don't have
+	   any windows apps to try out.
+
+1.20f to 1.20p
+        1. Added some window placement corrections
+	2. A few tweaks for move and resize operations. I think they're a
+	   little smoother now.
+	3. Made Icon placement for sticky icons always on the current
+	   page. Otherwise, you can't ever see them.
+	4. Made Focus policy ICCCM compliant, I think. No longer
+	   assigns focus to windows that don't accept focus, like
+	   xload (NoInput model). 
+	   Openwindows cm (calander manager), which uses the Globally
+	   Active model, still works OK.
+	5. Added configuration option XORvalue for users of 24 bit color
+	   machines.
+        6. Added MWMDecorHints to the configuration options. Use
+	   NoBoundaryWidth 4 for best results. Shading of narrow-but-still
+	   there frames needs some work!
+        7. Fixed up border drawing in a few spots to allow for the new
+	   mwm hints stuff. Still needs a little work for MWMBorders.
+	8. Replaced system(action) with an execl() as suggested by
+	   (lubkin@cs.rochester.edu).
+	9. Fixed error from #4 above, where an application (Frame-maker
+	   dialog boxes) didn't ever get the input focus because they
+	   did set wmhints but did not set the input field.
+	10. Really radical colormap handling changes. Maybe this will bring fvwm
+	   into conformance with the icccm.
+
+1.20 to 1.20f
+	1. Fixed a bug in the modules, where fvwm would hang trying to
+	   write to a module whose write buffer was full. Also, a
+           few very minor other patches were made.
+	2. Fixed a bug in strcasecmp.
+	3. Added a missing KeepOnTop() to the FocusOn routine, which
+	   is used by circulate up/down and warp.
+	4. Cleaned up a top-level makefile, added script MakeMyMakefiles
+	   since my version of Imake seems to be broken. Removed MakeMe
+	   and InstallMe. Removed all -Wall flags for subdirectory
+	   Imakefiles. Now specify compiler and flags in the top
+           level Imakefile.
+	5. Made safemalloc in all units handle specified lengths of
+	   0. It gets called this way when reading an EndWindowList
+	   packet from fvwm.
+	6. Improved detection of mouse-on-edge-of-screen, by
+	   Hermann Dunkel, HEDU, dunkel@cul-ipn.uni-kiel.de
+	7. Made DeferExecution sensitive to pressing and releasing
+	   the mouse buttons in different windows.
+	8. Cleaned up window-move and resize code. Maybe more
+	   responsive now.
+	9. Finally fixed menu-exposure problem with pager and GoodStuff.
+	10.Fixed(?) placement for windows with border width != 1.
+           May help fvwm pass tcl/tk window manager tests.
+	11.Fixed error in which InstallWindowColormaps was accessing freed
+	   memory sometimes.
+	12.Fixed border color problem stimulated as follows
+		1. Iconify
+		2. Stick
+		3. De-Iconify.
+	13.Restored ability to change viewports while waiting to select
+	   a window.
+        14.Added SAVE_UNDER_EVERYTHING, a compile time option to trade 
+	   extra memory for increased re-draw speed when moving/raising/
+	   lowering windows. Also added USE_BACKING_STORE and
+	   USE_BACKING_STORE_FOR_APPS_TOO.
+	15. Oops. number 11 above caused a core dump. Fixed it.
+1.18d to 1.20
+        1. Added -DSTUBBORN_ICONS
+	2. Remove -DCENTER_SIZEWIN, made it toggle with MWMMenus
+	3. Eliminated use of Makefile, always use Imake now,
+	   edit configuration.h in this directory, instead of
+	   separate Imakefiles. Create top level script MakeMe
+	   to do the build. See README.Install
+	4. Fixed a menu bug where a window popping up near the
+	   bottom of the screen immediately pops up a sub-menu, and
+	   the base menu fails to draw itself.
+	5. fixed an error in icon auto-placement relating to wide 
+           icons at the screen edge.
+	6. Incorporated SAVE_DESKTOP patches. No man page yet.
+	7. Twiddled focus control for multi-screen displays a 
+	   bit more.
+	8. Eliminated the Lost X connection stuff. It was causing
+           trouble for some people.
+        9. Added lots of capacity for modules and fvwm to talk to each
+	   other.
+        10. Made Iconify take an optional argument to limit actions to
+            either iconification or de-iconification.
+	11. Fixed a long standing bug regarding positioning of icons
+            that change their name of bitmap, and are not being
+	    auto-placed. Corrections work for Frame-maker. Haven't
+            got LEmacs to try.
+        12. Fixed lock-up problem with icons that are big and hang
+            over the edge of the screen.
+	13. Fixed problem with killing modules.
+        14. Added lots of capability to the module interface. Documented
+            in subdirectory documentation. Some minor changes need for
+            existing modules (done).
+        15. Modified Send_WindowList function to send all info necessary
+	    for the module to estimate the current fvwm status,
+	    including desktop number, paging status, focus.
+	16. Added several command line arguments for modules, so that they
+	    can tell if they are invoked from a window context, etc.
+	17. Added a module packet type, so that a module can request
+            a window list, and then tell when the complete list has been
+            sent.
+        18. Made NoClutter have user-configurable time-outs and actions.
+	19. Fixed flaw in GoodStuff. If you linked it to "TermStuff" then
+            you could pretend that you had a TermStuff module, but
+	    "OtherStuff" wouldn't work because it has a different number 
+            of characters.
+	20. Move the XAllowEvents in HandleButtonPress to AFTER
+            the window was raised. Helps prevent application
+            pop-up menus from showing up below the application window.
+        21. When De-Iconifying, with Center-On-Circulate, in click
+ 	    to focus mode, we were centering on the de-iconified window,
+	    which was incorrect. All fixed now.
+	22. Sub-menus popped up near the bottom of the screen had an
+            undesireable pointer warp in MWMMenu mode. Fixed.
+        23. Mailing List set-up
+            To subscribe:
+
+            mail to majordomo@shrug.org with the body of the message:
+
+            subscribe fvwm
+
+            That's all there is to it.  To send to the list, mail to 
+            fvwm@shrug.org, or to get me direclty mail to 
+            fvwm-request@shrug.org
+	24. Added FvwmIdentify module. Removed from unsupported patches.
+	25. Ooops - bug in broadcastConfig for fvwm-1.19p, fixed. Seemed
+	    to cause lockups every now and then.
+        26. Split MakeMe into MakeMe and InstallMe
+	27. Separated the module-tester from NoClutter. Added missing
+	    free's for module packet readers. General module clean-up;
+        28. Changed CirculateSkipIcons to a run-time configuration in
+            .fvwmrc, instead of compile time. Also, StubbornIcons, 
+	    StubbornIconPlacement, StubbornPlacement, and OpaqueResize
+        29. Fixed another obscure cause of crashes, stimulated as follows
+	     A> Pop up an xcalc
+	     B> Resize it really big.
+             C> While its redrawing itself (its slow) type q, in the window
+	     D> Move mouse to the title-bar.
+	     E> As soon as the title-bar redraws itself (should happen
+	        before xcalc finishes redrawing), hit middle mouse button,
+                to bring up menu.
+             F> xcalc window responds to the "q", by exiting.
+	     G> Window decorations, and popped-up menu are still there
+	     H> Choose "Destroy" from the menu.
+	     I> fvwm crashes.
+	30. Slightly faster resizes and moves, due to improved drawing 
+	    of size window
+	31. Created FvwmSaveDesktop module, removed builtin "Save".
+	32. Created FvwmInitBanner module. Silly.
+	33. Renamed all modules to Fvwmwhatever, so that I don't
+	    tread on program name-space. Left GoodStuff alone, since
+            its been available for some time.
+	34. Module clean-up. fixed Installatipn directory of modules.
+1.16c to 1.18d
+	1. Added support for multiple desktops via the DESK built-in.
+
+	   BUG: All windows wind up on desk 0 after a re-start.
+
+	   Intentional: No support for providing a pager-like view of
+           other desks. This will be supported in a module later.
+
+	2. Enhanced the windowList to allow display of
+  	     all windows
+	     only windows on the current desktop
+	     only windows on a specified desktop
+	   also, can use the window name or the window's icon name in
+	   the list.
+
+	3. Fixed the business about raising windows and transients
+	   together. (Accidentally broke it some time ago).
+	
+	4. Decided that some windows are not setting the WM_DELETE_WINDOW
+	   protocol fast enough, so fvwm doesn't know its set. Made 
+	   fvwm re-read the window property, to make sure. 
+	   Fixed problems with Mailtool not deleting properly. Probably
+	   not the real problem, though.
+
+	5. Incorportated the m4 patches into the core distribution, using
+	   option -DM4. -DCENTER_SIZEWIN came with it.
+	6. Switched to xpm-3.3. No real changes needed, except re-copying
+	   xpm.h and commenting out one prototype that gcc -Wall
+	   -Wstrict-prototypes had problems with.  Still compiles for
+	   xpm-3.2, even with the new header file.
+	7. Switched m4 method of obtaining the USER name to 
+	   the same method that rxvt uses. Was GETENV("USER"); which
+           is unreliable. Also changed XmuGetHostname to gethostname,
+	   since it eliminates the use of a whole slew of libraries.
+	8. A few mwm_like.fvwmrc improvements from bobw@PROCASE.COM
+	9. An update SGI_4DWM-like.fvwmrc from tabaer@magnus.acs.ohio-state.edu
+       10. Added code to detect cursors moving from one screen to another
+	   on a multiple screen display, so that focus control can be handled
+	   better. Left some debugging printfs in place so I could
+	   get feedback from people about what's going on.
+       11. Arranged for fvwm to pass the name of the config
+	   file that it used on to each module, in the command line.
+	   This helps modules select the correct config file (GoodStuff
+	   didn't in earlier releases), and eliminates the definition
+	   FVWMRC, the directory for the system.fvwmrc file, in all
+	   places except the fvwm Makefile
+       12. Made GoodStuff accept the Delete Window Protocol.
+Version 1.17 skipped altogether.
+
+1.16b to 1.16c
+        1. Fixed Segmentation fault from failing to modify
+	   Scr.Hilite when destroying hilighted window.
+1.16 to 1.16b
+	1. Fixed a conflict with auto-raise and the GoodStuff module.
+	
+1.15 to 1.16
+	1. Incorporated portability improvements from
+	   Rogers Huw
+	2. Icorporated speed improvement for ComplexFunctions fro
+	   Makoto Matsushita
+	3. Fixed bitmap color problem for GoodStuff on monochrome screens.
+	4. Trimmed down the total number of colors in the icons that
+	   I supply. Should alleviate colormap clogging a bit.
+        5. Added NoPPosition for emacs-18 users and others who
+	   tired of windows placing themselves sometimes.
+	6. Added NEEDS_SIGCHLD so that people can omit the
+	   SIG_CHLD stuff if needed.
+	7. Merge -DMENU_HOTKEYS and -DWINDOWLIST_HOTKEYS into
+	   -DHOTKEYS
+	8. Added SmartPlacement, which is even better than the button-bar.
+
+1.14 to 1.15b
+	1. Mostly updated the man pages, etc.
+	2. Marked module pipes close-on-exec just after the module
+	   forks, so that other programs don't inherit the pipes.
+	   If other programs inherited the pipes, fvwm couldn't
+	   re-start correctly.
+	3. Cleaned up warnings under various compilation flags
+1.13 to 1.14
+	1. Yay! Multi-screen mode works CORRECTLY!
+	   changed references to XSync(dpy,Scr.screen) to
+	   XSync(dpy,0). The second argument means throw away
+	   events if its non-zero. No wonder it didn't work.
+
+	   Important note: 
+	     1. Re-starts affect each screen sepately.
+	     2. Quitting requires a quit from each screen.
+	     3. Multi-screen mode is not normally compiled 
+	        in.
+	2. Removed references to Scr.d_visual.
+	3. Cleaned up some icon creation code.
+	4. Finished a good version of GoodStuff. Everyone
+	   should try it. Sorry, no man pages yet.
+	5. Included all referenced pixmaps and any bitmaps
+	   which are not part of the X11 distribution, in 
+	   the fvwm_icons directory.
+
+1.12 to 1.13
+	1. Added my ongoing "module" support, and created a
+	   subdirectory "GoodStuff" which contains the beginning
+	   of the first module. To try it out, compile with
+	   fvwm -DMODULES, add *GoodStuff business to
+	   .fvwmrc (look in GoodStuff/sample.fvwmrc).
+        2. Added patch to detect loss of server connection.
+	3. Added IconPath and PixmapPath upgrades (now works
+           like regular unix path.
+	4. Added TogglePage Command to enable/disable
+	   page toggling
+	5. Pruned a few lines of code in Iconify(), unneeded
+	   because of re-parenting
+	6. Fixed up Makefile.noImake.
+
+1.11 to 1.12
+	1. Fixed some bizarre window-positioning problems that occur
+           during re-starts when either window gravity was not set or
+           it was set with XSetNormalHints instead of XSetWMNormalHints.
+	2. Modified Icon auto-placement to place on the same screen
+	   as the center of the window, not necessarily on the
+	   current screen.
+	3. Fixed up some oscillation problems with focus control,
+	   regarding the property DOES_WM_TAKE_FOCUS. Seems to affect
+	   openwin clients mostly
+	4. Touch ups for shadow colors on ALPHA machines.
+	5. Fixed a source of core dumps during iconification
+           in click-to-focus mode
+	6. Fixed a flaw in the WindowList's paging when trying to
+	   find a window.
+	7. Assorted fixes to focus handling and flickering borders.
+	8. Incorporated patches for mxterm solid/hollow cursor probs.
+	9. Made MWM-style menus pop up with the upper left of the menu on
+           the mouse. 
+	10. Fixed 1-pixel over the edge problem with maximize and edge
+	    resistance.
+	11. Made multi-screen support a compile time option. Made fvwm
+	    pass the -s command line option when restarting in multi
+	    screen mode.	
+1.10 to 1.11
+	1. Fixed the stupid 1 pixel offset that I always have for shaped
+	   no title windows.
+
+1.09 to 1.10
+	1. Fixed up some focus handling a bit. Probably, some clients shifted
+	   the input focus to their children, confusing fvwm.
+	2. If MWMButtons is enabled, fvwm omits the right side buttons
+	   for transient windows, like mwm.
+	3. Updated the system.fvwmrc and mwm_like.fvwmrc files.
+	4. Added an Immediate option to complex functions.
+	5. Added function Warp, like Circulate, but de-iconifies as
+	   it goes.
+	6. Improved focus handling for iconification and de-iconification.
+        7. Added StickyForeColor and StickyBackColor for sticky windows,
+	   if compiled with -DMORE_COLORS
+	8. Added IconPath and PixmapPath to make config files simpler
+
+1.07 to 1.09
+	1. Changed Scr.Focus to Scr.Hilite
+	   ungrabbed to Scr.Focus
+	   previous_focus to Scr.Previous focus.
+	   All fallout from the Lucid emacs focusing nonsense.
+	2. Added prototypes to allow compilation on SunOS using
+	   -Wall -Wstrict-prototypes with GCC. For Linux,
+	   -Wall -Wstrict-prototypes has never been a problem.
+	3. Fixed it so that icons could get the focus once again
+	   (broke during the Lucid emacs work).
+	4. Fixed circulateup/down again. (Still more fall out
+	   from lucid emacs).
+	5. Fiddled with focus and colormap control when paging,
+	   esp for keyboard-induced paging. Removed all use
+	   of colormapNotify, since it seemed to be unneeded.
+	6. Incorporated assorted motif-like patches
+	7. Added visual button press info for all windows,
+	   unless -DMOTIF is used, in which case, only title-bar
+	   windows are done.
+	8. Implemented somewhat more conventional sub-menus,
+	   left justified all menus, except for titles. Added 
+	   NoBoundaryWidth for decoration width on undecorated
+           windows.
+	9. Changed all #ifdef MOTIF's to if(Scr.flags & MWM....)
+	   There are 3 options for the .fvwmrc:
+	        MWMborders
+		MWMbuttons
+		MWMMenus.
+       10. Fixed error in handling of RaiseLower when window is 
+	   partially obscured by a StaysOnTop Window.
+1.06 to 1.07
+	1. Changed several instances of strncasecmp to strcasecmp to
+	   improve handling of menu binding for people who like
+ 	   to have several menus with similar names.
+	2. Fixed (?) problems with windows moving during re-starts.
+	   (caused by mods to restorewidthdrawnlocation which were
+	   supposed to help with disappearing dialog boxes)
+	3. did a few mods regarding placement of windows on de-iconification
+	   (try to de-iconify onto the current screen).
+	4. Fixed ComplexFunctions so that they work correctly when
+	   called from a root window menu.
+	5. Added a patch from mark@ofps.ucar.edu (Mark Bradford)
+	   to correctly handle bindings to keysyms that have multiple
+	   physical keys.
+	6. Fixed CenterOnCirculate. This ought to cause serious
+	   grief for the unsupported_patches, since it changes the
+	   definitions for Scr.flags.
+	7. Fixed up operation for actively following the real input
+	   focus (Lucid Emacs). Now, the highlighted window should be
+	   the one that really has the input focus, not the 
+	   window that fvwm thinks should have the focus. This is achieved by
+	   having EnterNotify and LeaveNotify (or ButtonPress for click to
+	   focus) call setFocus only. When a FocusIn or FocusOut is received,
+	   fvwm updates the border color. The variable ungrabbed tells which
+	   window fvwm last sent the input focus to. The variable
+	   Scr.Focus tells which window is currently high-lighted.
+
+From 1.05 to 1.06
+	1. Fixed up detection of iconified windows on re-starts. Should
+	   lead to ability to re-start without loosing iconic state. Allows
+	   re-starts from mwm without loosing iconified windows.
+	2. Fixed up so fvwm respects iconic state accross re-starts. 
+           Restarts to and from mwm and olwm respect this too. Twm fails to
+	   respect the new stuff, but windows don't get lost, so it should be
+	   OK.
+	   (All this because I kept loosing my clock when re-starting into
+	   fvwm from mwm).
+	3. Fixed a minor error in button3 handling around the pager 
+	   decorations.
+	4. In click to focus mode, corrected window-focus stack on window 
+  	   iconfication.
+	5. Added correction for unmapping dialog boxes. May help with
+	   problems of disappearing dialog boxes.
+	6. Corrected flaw in Sticking and Unsticking windows failing
+	   to make the window show up/disappear in the pager.
+	7. Corrected a problem where deleting (not destroying) a
+	   window caused the next key-binding action to be executed twice
+	   IF the pointer wound up in the root window after the
+	   destroy. (Wow, weird).
+	8. Made Icon placement respect application supplied icon placement
+	   hints
+	9. Once the icon is moved, fvwm will no longer auto-place it.
+
+From 1.04 to 1.05
+	1. Fixed a minor flag in SetMapStateProp
+From 1.03 to 1.04
+	1. Eliminated the appearance of a (NL) character preceding
+	   the 2nd column menu entries.
+	2. Made title-bar and title-bar-button popups line up neatly under 
+	   their buttons. A nice little touch.
+	3. Whacked up the mwm-like.fvwmrc to use the new -DHOT_KEYS
+	4. Fixed problem with de-iconifying pager causing warping.
+	5. Added code to raise all of a windows transients with
+	   the window itself.
+	6. Fixed (?) a problem with border color errors on windows
+	   that unmap themselves and re-map quickly
+	7. Made default for menu popups to request save_unders.
+	   Quicker re-draws after a popup. Added a compile
+	   time option to get rid of it.
+	8. Compiled with -Wall and -Wstrict-prototypes again, and fixed a
+	   few minor errors. Removed all references to Xos.h, since it
+	   seems to be unneeded.
+From 1.02 to 1.03
+	1. #ifdef'd out this:
+           If a window is moved using pager and meets opaque
+           move criteria, move the window itself in real-time too.
+	   since it caused problems for some people.
+	2. Fixed the move-window indicator to display 12 characters, which
+	   was needed to indicate +1024 +1024.
+	3. Integrated patches for menu hotkeys and motif-like appearance
+	   right into the main source, since these are neatly #ifdef'd
+	   Left the default configuration as it was. Flags can be set
+	   in the makefile
+From 1.01 to 1.02
+	1. Fixed up pager code a bit.
+	   Leave grid lines on during a button3 drag in pager.
+	   If a window is moved using pager and meets opaque
+	   move criteria, move the window itself in real-time too.
+
+From 1.0 to 1.01
+	1. Fixed some border-drawingf details for tiny windows.
+	2. Fixed a possible crash condition during startup in
+	   MoveResizeViewportIndicator
+	3. Fixed a minor boo-boo in click to focus handling
+	   when mouse activities are bound to window events.
+
+To Do List (Sorted by # of requests):
+	Nothing
+
+
+From 0.99 to 1.0
+	1. Fixed the problem with grid lines not showing unless
+	   a pager font was used.
+	2. Removed flags |= VISIBLE from RaiseWindow in pager.c
+	   It prevented correct auto-raise operation.
+	3. Fixed the pager window title color problems.
+	4. Added a move-window location indicator similar
+	   to the one for resizing from Henrique Martins 
+	   <martins@hplhasm.hpl.hp.com>
+	5. fixed the window-resize wrap around problem.
+	6. Added code to move pager representation of windows as 
+           the real window moves/resizes.
+	7. Changed XCopyPlane for drawing icon pixmaps
+           to xcopy area, so that apps can pass color pixmaps
+	   to fvwm. Beat up on icon pixmap drawing to let it
+	   handle application supplied color icon pixmaps
+           and shaped icon pixmaps.
+	8. For cases when NumberOfScreens > 1, added a query
+	   to check for current screen prior to setting keyboard
+	   focus. Should fix problems of mysteriously loosing
+	   focus. Problems of not re-drawing decorations on expose
+	   events for screens other than 0 remain.
+	9. In order to get both matlab and xv to stop walking their
+	   windows around when the re-configure themselves, I had
+	   to re-parent application windows inside a parent that
+	   is exactly the same size as the app window. While I was in
+	   there, made fvwm re-parent undecorated windows, since this
+	   simplifies some things. Also, can now have seperate cursors
+	   for the four corners, which is ofter requested. (Why do
+	   matlab and xv have to be too smart for their own good?)
+	10.Tidied up above code, now let AddWindow() drop the decorations
+	   any old place, then let SetupFrame clean up the mess.
+	11.Middle-clicking on a window in the pager no longer moves
+	   the pager image of the window.
+	12.Changed to DrawImageString for pager labels, so that they are
+	   readable in monochrome.
+	13.Tried to improve icon autoplacement for icons that
+	   are too wide or tall for the icon box.
+
+From 0.985 to 0.99
+
+	1. Took a whack at multi-screen support.
+           Had to explicitly draw menus when they pop-up. They
+           didn't seem to get expose events properly.
+	2. Repaired the default-icon support.
+	3. Got xpaint dialog boxes to work. I was doing an
+	   XMapSubWindows() which caused xpaint's watch-
+           window bizareness to break if the window was
+	   not re-parented! (All subwindows of the
+           main application window got mapped).
+	4. Re-worked the pager for efficiency & improved
+	   appearance. Added PagerForeColor
+	5. Made LookInList case sensitive again.
+	6. Incorporated OpaqueMove and EdgeScroll Improvements 
+	   from Henrique Martins <martins@hplhasm.hpl.hp.com>
+	7. Added OpaqueMove to the default setup, with a 
+           percentage above which rubber-bands are used again.
+
+To Do List (Sorted by # of requests):
+
+(Don't construe this as an indication that these will eventually
+ be done. This is just a list to help me remember what requests have 
+ been made)
+
+	Done		Job
+
+			optional no icon labels
+	unlikely	Seperate Icon & Menu Colors
+	impossible?     Be able to fake mouse button presses for applications
+	partly  	Function correctly on multi-screen displays
+             x		Improve Icon Auto-placement
+	     x		Impove pager drawing speed
+
+
+From 0.98 to 0.985
+	1. Fixed some typos in fvwm.1
+        2. Fixed a clicktofocus test (typo) in
+           functions.c, FocusOn();
+        3. Fixed Foreground color usage in decorations.
+        4. Fixed placement of application supplied windows.
+        5. Patched up mwm_like.fvwmrc, so that it would delete
+           windows if you double click on button 1.
+	6. Added code to grab buttons and keys in icon windows,
+	   just in case.
+	7. Removed some WM_STATE setting for parent and icon windows.
+           caused editres to break.
+        8. changed 
+		struct _gravity_offset 
+		{
+		  int x, y;	
+		};
+	  in  add_window.c back to an int structure for RS/6000 users
+	  who had problems when it was char x,y;
+	9. Added a little functionality to CirculateUp/Down
+	10.Added user-selectable config file.
+	11.In GrabEm, Changed PointerGrab mode from false to true.
+	12.Fiddled AutoPlace so that if an Icon is going to wind up
+	   partly off the screen, it moves it back on. Now, if you
+	   specify an iconbox thats ot tall enough, along the bottom
+	   of the screen, Icons end up lined up neatly.
+        13.Fixed an unsigned/regular int problem in pager code which
+	   caused windows to "wrap around" if you moved them partly
+	   of the pager window.
+	14.Improved EdgeResistance scrolling code so that it
+           makes sure that the mouse stayed in the scroll region of
+	   the screen for the entire delay period. (It used to just
+ 	   check the start and stop points.
+        15.Removed lots of XGetGeometry and XSync calls to try
+           to speed things up. Suppressed error messages relating to
+           input focus and Colormap installation along the way.
+        16.Merged all name_lists into a single list with a flag
+           to tell what attributes are set. Saves memory in the list
+           and allows for expansion.
+        17.Fixed a few missing pixels in mono mode for menus and title-bar.
+	18.Major overhaul of borders.c, add_window.c, including touches to
+           other modules, under the guise of speed enhancement.
+	19.Added option for WindowListSkip.
+	20.Added compile time option to skip iconified windows when
+           circulating.
+
+To Do List (Sorted by # of requests):
+
+(Don't construe this as an indication that these will eventually
+ be done. This is just a list to help me remember what requests have 
+ been made)
+
+	Done		Job
+
+	x	        opaque move (compile time)
+
+			optional no icon labels
+
+	unlikely	Seperate Icon & Menu Colors
+
+	impossible?     Be able to fake mouse button presses for applications
+
+        mostly		Clean up border drawing code to  improve speed
+
+	x               editres is broken now.
+
+	x		if you move a window over the top of the
+			pager, it jumps to the bottom of the desktop.
+
+	x		No good way of lining up icons (neatly along the
+			bottom of the screen.
+
+	x               User selectable startup file
+			Add Weird and obscure options
+
+	x		Add option to leave entries out of the window list
+
+        x		Option to circulate skip over icons (compile time)
+
+From 0.975 to 0.98
+	1. Improved handling of Icons that change their
+           pixmaps. They no longer switch positions, and if
+	   they go from no pixmap to having a pixmap, that
+           is detected and handled.
+        2. Fixed Circulate Up/Down to handle SuppressIcons
+           and shaped windows.
+	3. Improved AutoRaise handling when used in conjunction
+           with application pop-up windows.
+	4. Fixed bug where all 10 title-bar buttons show up if you bind
+           something to "A" (all contexts)
+	5. Fixed problem of clicking button 2 in the pager causing windows to
+           shuffle around a bit.
+	6. Fixed problem where moving an icon in the pager window caused only
+           the label to move.
+	7. Added code to unmap icons supplied by application windows during 
+           re-starts.
+        8. Added code to check for window existence prior to setting the
+           input focus to that window. Eliminates some internal errors.
+	9. When using application-supplied icon windows, added code to 
+           reparent the icon window to the root window, because olwais
+           (and maybe others) make the icon windows children of the application
+           window.
+	10.Stopped clearing the icon pixmap window since its not needed and
+           causes flickering.
+	11.Compiled with -Wall -Wstrict-prototypes and cleaned up a lot
+           of the warnings. Suns don't seem to have prototypes for a lot
+           of standard functions like fprintf, so I can't leave these in.
+           Some items of siginificance were found and correct, must was of
+           no real concern.
+        12.Ran Purify on fvwm, found a few items of no real significance.
+        13.Remove the check for pointer motion from HandleMotionNotify, 
+           since that kept us from scrolling in deferExecution. Consolidate
+           all EdgeScrolling by pointer motion code into one routine in
+           the pager, HandlePaging
+	14.Added StickyIcons.
+	15.Changed all Bool type flags in the Scr structure to flags in an
+	   unsigned int. Should allow easier expansion in the future.
+	16.Added IconBoxes (up to 4). Removed keyword AutoPlaceIcons, since
+	   an IconBox line implies this.
+	17.Fixed up code for title-bar buttons, so that they never draw over
+           the frame corners. Also fixed the way left side buttons are
+ 	   drawn for shaped windows, and the way the title-bar, top and
+	   bottom side bars are drawn for really teeny windows.
+	18.Added code to optionally label the windows in the pager
+	   with a really teeny font.
+        19.Added a call to WaitForButtonsUp() at the end of addWindow(), since
+	   it seemed to be possible to loose the input focus by moving the
+	   cursor really fast after adding a window.
+	20.Added IconFont (optional) for icon labels. To do this,
+	   changed the PagerGC to FontGC, whose sole purpose in life
+	   is to host miscellaneous fonts. Defined a macro in misc.h
+	   to switch the font for FontGC.
+	21.Switch from using XShapeCombineShape to XShapeCombineRectangles
+	   to make shaped window title-bars. Does it all in one call,
+	   much faster. Also move Shape setting code to its own subroutine
+	   for ShapeNotify events. Moved SetupFrame to borders.c
+	22.Fixed problem where windows partly off the top or left of the 
+	   desktop didn't show up in the pager.
+	23.Made the window list use the middle of the window as a test
+           of on/off screen/desktop, instead of all sorts of bizarre
+	   quantities.
+	24.Consolidated a few config.c subroutines while adding EdgeResistance.
+	25.General clean up in events.c, borders.c, functions.c
+To Do List (Sorted by # of requests:
+	Done		Job
+	 x		IconBoxes (for autoplacement)
+	 x		PagerLabelFont
+			Seperate Icon & Menu Colors
+	 x		EdgeResistance
+         x		IconFont
+	 x		Sticky Icons
+	 		Be able to fake mouse button presses for applications
+	partial		Clean up border drawing code to  improve speed
+         x		Clean up shaped window handling in SetupFrame, to
+			  	improve speed.
+
+From 0.97 to 0.975
+	1. Changed getdtablesize() to sysconf() in events.c
+           (getdtablesize doesn't exist in HP/UX.
+        2. Added a ConstrainSize call to the Maximize routine
+           in functions.c (thanks to Pete Bevin <pete@sst.icl.co.uk>).
+	3. Fixed misc bugs in AutoRaise and WindowList
+        4. Allowed ^N, ^P, ^f, ^b shortcuts in addition to arrow keys
+
+
+From 0.96 to 0.97
+	1. Fixed the problem of not being able to correctly bind
+           a function key to a decoration point such as the title-bar.
+	   This involved moving the XGrabKey() grabs from the
+	   decorations/windows to the frame, and then fixing up
+	   GetContext to recognize the subwindow field of the xkey
+	   events.
+	2. Fixed the Fvwm Internal Errors found when de-iconifying windows
+	   These were caused by doing a deferExecution on an icon window
+	   and trying to unset the keyboard focus before grabbing the
+	   keyboard, andthen restoring it later. The error was in trying to
+           restore the focus to the application window instead of the icon
+	   Create functions GrabEm and UngrabEm to handle moving the
+	   keyboard focus, grabbing the pointer and keyboard, and then 
+           ungrabbing/re-focusing later.
+	3. In HandleEnterNotify, decided to detect entering the root window,
+	   because we sometimes can leave a window without it being 
+           detected by HandleEnterNotify. This was related to pop-up
+	   menus in window title-bars.
+	4. Fixed a small error in add_window() which caused completely
+           undecorated windows to be made one pixel taller than they should be.
+	5. Moved click to focus code in HandleButtonPress() to
+	   the very start of the routine, since it would lock up
+           the WM when pressing button 2 in a window otherwise.
+	6. Swapped order of UngrabEm and XUnmapWIndow in PopDownMenu()
+	   so that focus is not lost when using keyboard shortcut menus
+	   <alt-F2>, for example, in a window.
+	7. Added a DefaultIcon enable by adding a line
+	   Icon "" my-favorite-bitmap-or-pixmap.
+	8. Bottom and Right sides of shaped titled windows were
+           colored with the border shadow color. Fixed it.
+	9. Added user selectable title bar button decoration shapes.
+       10. Added an AnyModifier modifier type, and an AnyButton button type.
+       11. With RandomPlacement, we didn't GrabServer before adding a new
+	   window so it was possible to get an decoration with no
+           window. Fixed this. Also made GrabEm() fail after 1 second,
+	   and provided appropriate handling for all routines that
+           call it. Thus if we need to grab the pointer, and fail after
+           1 second, then we give up.
+       12. Added a WaitForButtonsUp() routine which hangs around until all
+           mouse buttons are up, then double checks on window focus
+	   (for point-to-focus mode). This is called on termination of
+           any menu for function execution.
+       13. Added a WindowList function like TwmWindows. Required some
+	   menu-drawing upgrades.
+       14. Added a SuppressIcons to use in conjunction with the WindowList
+           for people who like icon-managers.
+       15. Gave Maximize some optional arguments to control which directions
+           are maximized.
+       16. Utilize the WindowList mods to menus to provide 2-column
+           menu entries (For shortcut labelling). This also provides for
+	   left adjusted menus.
+       17. Made the restart do a conventional restart if the restart
+           into another program failed.      
+       18. Added a CursorMove function to aid in mouseless use.
+       19. Changed icon windows to two part windows with the label window
+           seperate from the bitmap window. This improves appearance of
+           icons when the label size does not match the bitmap size. Also
+           label window width is now equal to bitmap window width unless the 
+	   icon has the input focus. This should improve auto-placement.
+       20. Added some input focus queue code for click to focus mode.
+       21. Move button grabs in click-to-focus mode to the frame because
+	   otherwise frame-maker crashes sometimes.
+       22. Fixed a problem of a failed attempt to bind Alt+button2
+           to resize in a window.
+       23. Modified use of tolower() in configure.c to be compatible
+	   with some BSD versions.
+       24. Cleaned up the shaped window handling a little, because
+	   xlogo -shape came out wrong.
+       25. Added the Function built-in.	Removed the raise-on-click
+           behaviour for move and resize builtins too.
+       26. Changed zombie handling code to a simple
+	   signal(SIGCHLD,SIG_IGN). Seems to work. Old method
+	   caused problems for HP-UX.
+       27. Added AutoRaise with user selectable delay.
+
+Bugs:
+Should re-parent undecorated windows because of the button/key grabbing
+problems
+
+****************************************************************************
+
+From 0.95 to 0.96
+	1. Changed #ifdef SYSV to #ifdef POSIX for ReapChildren
+	2. Divided the NoTitle option into separate 
+	   NoTitle and NoBorder options. This eliminated
+	   a lot of the #ifdef SHAPE sections and cleaned up
+	   code a little.
+	3. Took another whack at getting windows to stay put
+	   through the re-start command. This time, I tried doing
+           it by measuring window placement before re-parenting
+	   and after, to get the delta	
+	4. Took a patch from davem@extro.ucc.su.OZ.AU to
+	   make color XPM icons into shaped icons if
+	   both SHAPE and COLOR are specified in the makefile.
+	   Diffs were pretty much limited to icons.c.
+	5. Allowed icon windows to take input focus so that
+           keyboard key binds would work in icon windows. Involved
+	   minor changes in events.c and borders.c
+	6. Attempted to switch from using if(tmp_win->title_w)
+	   and if(tmp_win->title_height) to using just
+           if(tmp_win->flags & TITLE). Required for splitting
+	   the NoTitle option into NoTitle and NoBorder.
+	7. Fixed a small bug with icon AutoPlacement, reported long
+	   ago but just identified. AutoPlacement wanted five pixels
+	   space on all sides of the icon EVEN IF IT WAS ON THE NEXT
+	   PAGE. Oops. Should be fixed.
+	8. Replaced usleep() call with a subroutine that should be
+	   OK for more systems, using select(). Thanks to krumnow@sap-ag.de
+	9. Fixed a problem with fvwm reporting stray mouse-button releases
+	   to applications. This was caused by de-iconifying on a
+           button press in the icon window. If the window appears under
+           the icon, it receives the release event. Caused xmeter to croak.
+       10. Fixed a problem where you could move a window over a page
+	   boundary, release the mouse button, move the mouse really
+	   fast, and the window would show up in the wrong place.
+	   Change was limited to move.c. Added an extra XQueryPointer()
+	   call.
+       11. Move the ExececuteFunction() call from menus.c to functions.c
+	   where it really belonged. Along the way, caused the pointer to
+           warp back to its pre-menu popup location when a resize operation
+           is invoker. The move operation has always worked this way.
+       12. Fixed an error in parsing Key bindings for Restart and
+	   Exec functions.
+       13. Re-wrote the pager so that you could move windows using it,
+	   and could select the focus in click-to-focus mode.
+       14. Added a Maximize function.
+       15. Added a user-selectable number of title-bar buttons.
+       16. When trying to grab the pointer for whatever reason,
+	   added a 1 msec delay between events, and give up after
+           1 second. If some other window has a grab on the pointer,
+	   we don't want to lock up the whole system just
+	   because we want the pointer.
+
+0.96 Known Unresolved bugs:
+1. Keyboard keys can't be bound to actions in the window decorations.
+
+2. Fvwm crashes occasionally? One report, involving Ftptool 4.5,
+   could not be re-created by me.
+

@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# Replaces the commands xmkmf; make Makefiles for my broken setup.
+#
+
+echo Making top-level Makefile
+xmkmf
+echo done
+
+TOPDIR=`pwd`
+echo TOPDIR is $TOPDIR
+
+for i in libs fvwm xpmroot modules/*
+do
+echo Making Makefile in $i
+cd $i ; xmkmf ; cd $TOPDIR
+echo done
+done
+
+

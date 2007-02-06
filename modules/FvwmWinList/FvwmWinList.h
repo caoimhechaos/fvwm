@@ -1,4 +1,4 @@
-#include "../../libs/fvwmlib.h"       
+#include <libs/fvwmlib.h>
 /* FvwmWinList Module for Fvwm. 
  *
  *  Copyright 1994,  Mike Finger (mfinger@mermaid.micro.umn.edu or

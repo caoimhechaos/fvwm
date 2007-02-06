@@ -1,4 +1,4 @@
-#include "../../libs/fvwmlib.h"       
+#include <libs/fvwmlib.h>       
 #define STICKY         1 /* Does window stick to glass? */
 #define ONTOP          2 /* does window stay on top */
 #define BORDER         4 /* Is this decorated with border*/

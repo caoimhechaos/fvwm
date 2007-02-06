@@ -12,7 +12,7 @@
  *
  ***********************************************************************/
 
-#include "../configure.h"
+#include <config.h>
 
 #include <stdio.h>
 #include <unistd.h>
@@ -23,6 +23,7 @@
 #include <X11/keysym.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/errno.h>
 
 #include "fvwm.h"
 #include "menus.h"
@@ -39,7 +40,7 @@ int *pipeOn;
 unsigned long *PipeMask;
 struct queue_buff_struct **pipeQueue;
 
-FVWM_INLINE int PositiveWrite(int module, unsigned long *ptr, int size);
+inline int PositiveWrite(int module, unsigned long *ptr, int size);
 void DeleteQueueBuff(int module);
 void AddToQueue(int module, unsigned long *ptr, int size, int done);
 
@@ -598,8 +599,7 @@ void SendName(int module, unsigned long event_type,
 
 
 
-#include <sys/errno.h>
-FVWM_INLINE int PositiveWrite(int module, unsigned long *ptr, int size)
+inline int PositiveWrite(int module, unsigned long *ptr, int size)
 {
   if((pipeOn[module]<0)||(!((PipeMask[module]) & ptr[1])))
     return -1;

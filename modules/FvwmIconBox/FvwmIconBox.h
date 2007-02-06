@@ -3,7 +3,7 @@
  * Subroutine Prototypes
  * 
  *************************************************************************/
-#include "../../libs/fvwmlib.h"       
+#include <libs/fvwmlib.h>
 struct icon_info;
 Bool ExecIconBoxFunction(char *msg);
 extern void   CreateWindow(void);
@@ -19,7 +19,7 @@ extern char   *safemalloc(int length);
 extern void   change_window_name(char *str);
 extern int    My_XNextEvent(Display *dpy, XEvent *event);
 extern void   CopyString(char **dest, char *source);
-extern FVWM_INLINE void RelieveWindow(Window win,int x,int y,int w,int h,GC rGC,GC sGC);
+extern inline void RelieveWindow(Window win,int x,int y,int w,int h,GC rGC,GC sGC);
 extern void   SendFvwmPipe(int *,char *text, unsigned long window);
 extern void   DeadPipe(int nonsense);
 extern void   CreateIconWindow(struct icon_info *item);
@@ -167,7 +167,7 @@ extern char *pixmapPath;
 
 #define ICON_RELIEF 4
 
-#include "../../fvwm/fvwm.h"
+#include <fvwm/fvwm.h>
 
 #define NO_CLICK 0
 #define CLICK 1

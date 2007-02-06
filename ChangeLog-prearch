@@ -1,7 +1,16 @@
-q to r
+Todo List for 1.24r-tch2 (sorted by priority)
+	* import bbraun's patches for Xinerama support
+	* track down the window placement hangup
+	* prevent windows from getting stuck while a window is being placed/moved
+	* xcompmgr compatibility stuff
+
+1.24r to 1.24r-tch1
+      1. Converted the build system from imake to automake (Tonnerre)
+
+1.24q to 1.24r
       1. Fixed blatant GoodStuff boo-boo, with the 'Swallow' command.
 
-p to q
+1.24p to 1.24q
       1. Fixed bug in Move/Resize with coordinates specified, when
          accessed through modules.
       2. Prohibited zero width/height windows, which are nasty.
@@ -17,7 +26,7 @@ p to q
          done under the fvwm-1.xxx system, because of the distinction
 	 between configuration commands and built-in commands.
 
-o to p 
+1.24o to 1.24p 
       1. Minor patch to Circulate functions
       2. Removed button-stays-depressed feature from the sample .fvwmrc
          files. No changes to the source code, I just removed the qouted
@@ -36,37 +45,38 @@ o to p
 
       3. Removed my e-mail address from everything.
          
-n to o
+1.24n to 1.24o
       1. Fixed:
              a. raising of no-title icons
 	     b. CirculateDown enters an infinite loop
              c. command line argument -w <number> was interpreted
 	        as -workspace <number> for application programs.
 
-m to n
+1.24m to 1.24n
       1. minor colormap fixup
       2. minor restart fixup.
 
-l to m
+1.24l to 1.24m
        1. Fixed a problem where de-iconified windows don't always
           end up on top.
 
-k to l
+1.24k to 1.24l
        1. Removed a debugging printf
        2. Restored pager.c which got abused during a disk-space crunch.
 
-j to k
+1.24j to 1.24k
        1. Fixes (?) for Move
-i to j
+
+1.24i to 1.24j
        1. Fixed bug in FvwmPager
        2. Made Click-to-focus work with CapsLock on.
 
-h to i
+1.24h to 1.24i
        1. Miscellaneous little things
                  Top level imakefile fixed up
 		 fixed a few small errors.
 
-g to h 
+1.24g to 1.24h 
        1. Mailing List changed
             To subscribe:
 
@@ -79,7 +89,8 @@ g to h
        2. Fixed the icon-label-disappears-after-move problem
        3. Added optional arguments to resize, just like move.
        4. Updated man page to reflect changes for versions g & h.
-f to g
+
+1.24f to 1.24g
        1. Fixed core-dump from FvwmBacker.
        2. Added (but didn't test much) a feature where you can
           specify arguments to Scroll, movecursor, and maximize
@@ -97,7 +108,7 @@ f to g
           arguments can be in pixels or percent of screen-size, like
           the other commands above.
 
-e to f
+1.24e to 1.24f
        1. Switched from XFetchName to XGetWMName,
           in deference to motif 1.2 (? bug report)
        2. Kept the FvwmPager from allowing you to move windows
@@ -105,15 +116,17 @@ e to f
        3. When selecting a window in the WIndowList, fvwm
           makes sure that the window is visible at the end.
 
-d to e
+1.24d to 1.24e
        1. fixed some bugs associated with (c)
        2. Added quick-restart, which ain't so quick, but may 
           lead to something
-c to d
+
+1.24c to 1.24d
        1. Futzed with #ifdefs a lot.
 
-1.24b to c
+1.24b to 1.24c
        1. Kept moving common subroutines in the library.
+
 1.24 to 1.24b
        1. Renamed strncasecmp, strcasecmp, gethostname to avoid
           potential conflicts with OS provided functions.
@@ -183,41 +196,44 @@ c to d
 	   <X11/xpm.h>, so you can put your copy in /usr/include/X11/xpm.h
         4. Fixed malloc(0) problem in FvwmFileMgr.
 
-z.1 to 1.23
+1.22z.1 to 1.23
 	1. Applied m4 patches.
 	2. Applied some FvwmIconBox patchs
 	3. Applied GNU m4 patches
 	4. Applied the NoButton and ButtonStyle extension patches.
 	5. Fixed the problem "Warp skips over icons if NoIcons is set".	
-1.22z to z.1
+
+1.22z to 1.22z.1
 	1. Fixed up the Imakefile to reasonably allow
 	   installation into a non-standard directory. Tried it too.
 
-y to z
+1.22y to 1.22z
 	1. Fiddled with the errno return values when writing to pipes.
  
-x to y
+1.22x to 1.22y
 	1. Fixed click-to-focus mode.
 	2. Added FvwmSaveDesk module
 
-w to x  
+1.22w to 1.22x  
 	1. Allow negative auto-raise delays to suppress the
 	   raise-on-focus behavior of click-to-focus mode.
 	2. Fixed (?) GoodStuff for ALphas
 	3. Modified module-interface code to speed it up (maybe).
-v to w
+
+1.22v to 1.22w
 	1. Added some dead-child reaping changes.
 	2. Completely fixed fvwm-to-module communications.
-u to v.
+
+1.22u to 1.22v
 	1. Added Set_Mask command for modules to set their message mask
 	   which will reduce unneeded traffic into the pipes.
 	   Updated GoodStuff and FvwmPager to use the new feature.
 
-t to u.
+1.22t to 1.22u
 	1. Added some FvwmIconBox changes.
 	2. Fiddled with Fvwm-to-module communications a bit.
 
-s to t
+1.22s to 1.22t
 	1. Incorporated the NoIconTitle patches. You can add a style
 	    Style "xmag" NoIconTitle, Icon magnifying_glass2.xpm
 	2. Added the very nice FvwmIconBox module. I've switched to it 
@@ -225,14 +241,14 @@ s to t
 	   GoodStuff, which is pretty cool).
 	3. Made FvwmScroll scrollbars look and function like the
 	   FvwmIconBox scroll-bars.
-r to s
+1.22r to 1.22s
 	1. Add the built-in Close, a hybrid of Delete and Destroy, which
 	   probably mimics OpenWindows and MWM's close function.
 
-q to r
+1.22q to 1.22r
 	1. Made FvwmFileManager handle icons that it can't find.
 
-p to q
+1.22p to 1.22q
 	1. Small fix with regards to starting a window on a specific
 	   desk and then quickly changing desks.
 	2. Loss-of-focus-after-iconifying bug fixed (?)
@@ -240,7 +256,7 @@ p to q
 	   choice of "/" as a fore/back color seperator turns out
 	   to be poor.
 
-1.22o to p
+1.22o to 1.22p
 	1. Bug (?) fixed which affected multi-screen support.	
 	   Probably explains reports of gradual loss of functionality
 	   when used on multi-screen displays.
@@ -253,14 +269,14 @@ p to q
 	3. Added an XAllowEvents to WaitForButtonsUp(),
 	   in case that was causing lock-ups.
 
-1.22n to o
+1.22n to 1.22o
 	1. Bug fixes for FvwmFileMgr.
 
-1.22m to n
+1.22m to 1.22n
 	1. Lots of FvwmFileMgr changes. Its now pretty useable, although
 	   sluggish at times.
 	   Read the README in the source directory.
-1.22l to m
+1.22l to 1.22m
 	1. Still More fixes for big buttons in GoodStuff
 	2. More upgrades to FvwmFileMgr.
 
@@ -284,12 +300,14 @@ p to q
 	3. Fixed a bug in random-placement, where "off-screen" windows
 	   weren't detected quite right.
 	4. Incorporated the latest FvwmWinList patches.
+
 1.22h to 1.22i
 	1.Fi xed auto-raise for small time-out values.
 	2. Converted val1 and val2 in the menu-structure to
 	   longs for the Alphas out there.
 	3. Changed FvwmWinList to give black shadows on monochrome systems.
 	4. Improved GoodStuff's handling of multi-width/height buttons
+
 1.22g to 1.22h
 	1. Added stuff to GoodStuff.
 		a. Multi-width/height butttons
@@ -308,13 +326,15 @@ p to q
 
 1.22e to 1.22f
 	1. Fixed F_RAISE_IT by merging with F_FOCUS
-1.22d to e
+
+1.22d to 1.22e
 	1. Made GoodStuff do a constrained resize when it swallows windows.
 	2. Updated mwm.fvwmrc and 4Dwm.fvwmrc samples.
 	3. Fixed the 1-pixel width/height error that pervaded fvwm.
 	   It was just that the base-width/height was assumed to be 1, not
 	   zero, if the application didn't supply it.
-1.22c to d
+
+1.22c to 1.22d
         1. Fixed a minor focus bug, a few other little odds and ends.
 	
 1.22b to 1.22c
@@ -350,7 +370,8 @@ p to q
 	2. Fixed some bugs in the FvwmPager and other modules.
 	3. Fixed case where moving an icon across desks in the pager didn't
 	   work quite right.
-1.21zn to zo
+
+1.21zn to 1.21zo
 	1. Added special functions
 		InitFunction
 		RestartFunction
@@ -359,7 +380,8 @@ p to q
 	   warp and circulate up/down commands are used.
 	3. Added some potential improvements for colormap handling.
 	4. Added the Wait builtin to make InitFunction more useful.
-1.21zm to zn
+
+1.21zm to 1.22zn
 	1. Added BorderWidth and HandleWidth to style command.
 		---> replaces BoundaryWidth and NoBoundaryWidth
 		     commands & adds flexibility.
@@ -367,6 +389,7 @@ p to q
 		---> #ifndef PRUNE
 	3. FIxed error in wild-card matching for trailing "*",
 	   in case where the trailing * needs to match a null-string.
+
 1.21zl to 1.21zm
 	1. Added opposite behaviors to Style:
 	   Title, Handles, StaysPut, Slippery, CirculateHit,
@@ -384,7 +407,7 @@ p to q
 	   allows only the FvwmPager module's built-in icon to appear.
 	4. Fixed a few minor bugs in Style.
 
-1.21zk to zl
+1.21zk to 1.21zl
 	1. Fixed man page for Focus built-in. Focus does not
 	   de-iconify.
 	2. Built-in pager is no longer automatically sticky.
@@ -393,12 +416,13 @@ p to q
 	   bad, so we still need the old default icon command. No
 	   new capabilities have been added at this time.
 
-1.21zj to zk
+1.21zj to 1.21zk
 	1. Fixed some bugs in FvwmScroll
 	2. Removed all use of CurrentTime in focus control.
 	   (Use propertyNotify events for click-to-focus when first
            mapping a new window).
 	3. Remove symlinks from source tree
+
 1.21zi to 1.21zj
 	1. Added wild-card parsing to NoTitle, Sticky, 
 	   NoBorder, Icon, WindowListSkip, and StartsOnDesk. Neat.
@@ -407,6 +431,7 @@ p to q
 1.21zh to 1.21zi
 	1. Fixed Keyboard shortcuts in DeferExecution.
 	2. Added FvwmScroll module.
+
 1.21zg to 1.21zh
 	1. Fixed border drawing code to look OK for any width
 	   of border from 0 up. BoundaryWidth 0 really gives no
@@ -426,13 +451,14 @@ p to q
 	2. Adjusted fonts, border widths, etc of the default 
 	   system.fvwmrc
 
-ze to zf
+1.21ze to 1.21zf
 	1. Fixed minor error in pager geometries.
 
-1.21zd to ze
+1.21zd to 1.21ze
 	1. Fixed the problem of vestigial decorations for swallowed
 	   windows.
 	2. Made NoBoundaryWidth 0 actually give a boundary-width of zero.
+
 1.21zc to 1.21zd
 	1. Added "swallow" to GoodStuff
 
@@ -459,7 +485,7 @@ ze to zf
 	   mouse, except that focus stays witht the window until you enter
 	   a new window.
 	
-1.21w to 1.21 y
+1.21w to 1.21y
 	1. Fixed up LookInList, so that
 		Sticky xbiff
 		Notitle XBiff
@@ -479,12 +505,12 @@ ze to zf
 	   or to grab the application icons, or to grab the application
 	   window itself (for xclock, xbiff).
 
-
 1.21v to 1.21w
 	1. Fixed focus-on-warping problem.
 	2. Fixed StickyIcons in new FvwmPager
 	3. Fixed circulate up/down handling of windows that don't
 	   accept focus
+
 1.21u to 1.21v
 	1. Added built-in Focus for use by FvwmWinList
 	2. Made fvwm ungrab the pointer just prior to
@@ -496,6 +522,7 @@ ze to zf
 		*FvwmPagerFont none
 	   which causes the desktop-labels to be omitted.
 	2. Added FvwmPagerRows and FvwmPagerColumns
+
 1.21s to 1.21t
 	1. Remove most of HandleLeaveNotify, since it caused occasional
 	   focus loss.
@@ -522,9 +549,9 @@ ze to zf
 	4. Made LENIENCE a run time option.
 	5. Fixed the focus-on-root problem
 
-
 1.21p to 1.21q
 	1. Added FvwmWinList
+
 1.21o to 1.21p
 	1. Big clean up for focus control. Completely
 	   eliminated CheckAndSetFocus().
@@ -567,6 +594,7 @@ ze to zf
 1.21h to 1.21k
 	1. Made FvwmPager understand initial stacking order
 	2. made windows stay on desk when de-iconifying.
+
 1.21g to 1.21h
 	1. Added the built-in WindowsDesk to move a window to
 	   another desk, without having to go through
@@ -574,6 +602,7 @@ ze to zf
 	   pager module use this option.
 	2. Added a man pager for FvwmPager and an FvwmPagerLabel
 	   command.
+
 1.21e to 1.21g
 	1. Fixed a focusing bug. Seems to affect motif windows.
 	2. Got the new FvwmPager module mostly written. People
@@ -582,6 +611,7 @@ ze to zf
 	   see all desktops at once. The B&W mode isn't done, and
 	   window-labels don't show up in the pager. Also,
 	   the move-windows-between desktops is clumsy.
+
 1.21e to 1.21f
 	1. Make AddToList case sensitive, since re-extracting
 	   info is case sensitive. May have a small effect on
@@ -613,7 +643,6 @@ ze to zf
 	3. Changed time stamp for XSetInputFocus from CurrentTime to
 	   lastEventTime, to be more ICCCM compliant.
 
-		     
 1.21c to 1.21d
 	1. Added MWMHintOverride.
 	   I suppose this should open a dialog box to confirm the
@@ -633,7 +662,6 @@ ze to zf
 	1. Fixed bitmap handling in revised GoodStuff module.
 	   (Used to fail with BadMatch).
 	2. Changed a few instances of FvwmInitBanner to FvwmBanner.
-
 
 1.20z to 1.21
 	1. Finished conversion to 14 or less character file names.
@@ -719,13 +747,13 @@ ze to zf
 	   response. GoodStuff needs some big-time clean up for opaque
 	    move users, though.
 
-
 1.20s to 1.20u
 	1. Added some extra support for keeping transients on the same
 	   desk as their parents, and for keeping window groups together.
 	2. Added a minor correction. If a transient was unmapped because
 	   its parent was iconified, the pager was not getting updated
 	    correctly
+
 1.20p to 1.20s
 	1. Added support for interpreting the mwm-hints functions field
 	   not all done yet.
@@ -812,6 +840,7 @@ ze to zf
 	   lowering windows. Also added USE_BACKING_STORE and
 	   USE_BACKING_STORE_FOR_APPS_TOO.
 	15. Oops. number 11 above caused a core dump. Fixed it.
+
 1.18d to 1.20
         1. Added -DSTUBBORN_ICONS
 	2. Remove -DCENTER_SIZEWIN, made it toggle with MWMMenus
@@ -903,6 +932,7 @@ ze to zf
 	    tread on program name-space. Left GoodStuff alone, since
             its been available for some time.
 	34. Module clean-up. fixed Installatipn directory of modules.
+
 1.16c to 1.18d
 	1. Added support for multiple desktops via the DESK built-in.
 
@@ -950,11 +980,13 @@ ze to zf
 	   FVWMRC, the directory for the system.fvwmrc file, in all
 	   places except the fvwm Makefile
        12. Made GoodStuff accept the Delete Window Protocol.
+
 Version 1.17 skipped altogether.
 
 1.16b to 1.16c
         1. Fixed Segmentation fault from failing to modify
 	   Scr.Hilite when destroying hilighted window.
+
 1.16 to 1.16b
 	1. Fixed a conflict with auto-raise and the GoodStuff module.
 	
@@ -981,6 +1013,7 @@ Version 1.17 skipped altogether.
 	   If other programs inherited the pipes, fvwm couldn't
 	   re-start correctly.
 	3. Cleaned up warnings under various compilation flags
+
 1.13 to 1.14
 	1. Yay! Multi-screen mode works CORRECTLY!
 	   changed references to XSync(dpy,Scr.screen) to
@@ -1039,6 +1072,7 @@ Version 1.17 skipped altogether.
 	11. Made multi-screen support a compile time option. Made fvwm
 	    pass the -s command line option when restarting in multi
 	    screen mode.	
+
 1.10 to 1.11
 	1. Fixed the stupid 1 pixel offset that I always have for shaped
 	   no title windows.
@@ -1087,6 +1121,7 @@ Version 1.17 skipped altogether.
 		MWMMenus.
        10. Fixed error in handling of RaiseLower when window is 
 	   partially obscured by a StaysOnTop Window.
+
 1.06 to 1.07
 	1. Changed several instances of strncasecmp to strcasecmp to
 	   improve handling of menu binding for people who like
@@ -1142,6 +1177,7 @@ From 1.05 to 1.06
 
 From 1.04 to 1.05
 	1. Fixed a minor flag in SetMapStateProp
+
 From 1.03 to 1.04
 	1. Eliminated the appearance of a (NL) character preceding
 	   the 2nd column menu entries.
@@ -1159,6 +1195,7 @@ From 1.03 to 1.04
 	8. Compiled with -Wall and -Wstrict-prototypes again, and fixed a
 	   few minor errors. Removed all references to Xos.h, since it
 	   seems to be unneeded.
+
 From 1.02 to 1.03
 	1. #ifdef'd out this:
            If a window is moved using pager and meets opaque
@@ -1170,6 +1207,7 @@ From 1.02 to 1.03
 	   right into the main source, since these are neatly #ifdef'd
 	   Left the default configuration as it was. Flags can be set
 	   in the makefile
+
 From 1.01 to 1.02
 	1. Fixed up pager code a bit.
 	   Leave grid lines on during a button3 drag in pager.
@@ -1185,7 +1223,6 @@ From 1.0 to 1.01
 
 To Do List (Sorted by # of requests):
 	Nothing
-
 
 From 0.99 to 1.0
 	1. Fixed the problem with grid lines not showing unless
@@ -1227,7 +1264,6 @@ From 0.99 to 1.0
 	   are too wide or tall for the icon box.
 
 From 0.985 to 0.99
-
 	1. Took a whack at multi-screen support.
            Had to explicitly draw menus when they pop-up. They
            didn't seem to get expose events properly.
@@ -1404,6 +1440,7 @@ From 0.975 to 0.98
 	   quantities.
 	24.Consolidated a few config.c subroutines while adding EdgeResistance.
 	25.General clean up in events.c, borders.c, functions.c
+
 To Do List (Sorted by # of requests:
 	Done		Job
 	 x		IconBoxes (for autoplacement)
@@ -1424,7 +1461,6 @@ From 0.97 to 0.975
            in functions.c (thanks to Pete Bevin <pete@sst.icl.co.uk>).
 	3. Fixed misc bugs in AutoRaise and WindowList
         4. Allowed ^N, ^P, ^f, ^b shortcuts in addition to arrow keys
-
 
 From 0.96 to 0.97
 	1. Fixed the problem of not being able to correctly bind

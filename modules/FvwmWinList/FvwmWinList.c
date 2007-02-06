@@ -31,7 +31,7 @@
 #define YES "Yes"
 #define NO  "No"
 
-#include "../../configure.h"
+#include <config.h>
 
 #include <stdio.h>
 #include <signal.h>
@@ -45,7 +45,7 @@
 #endif
 #include <unistd.h>
 #include <ctype.h>
-#ifdef ISC /* Saul */
+#ifdef HAVE_SYS_BSDTYPES_H /* Saul */
 #include <sys/bsdtypes.h> /* Saul */
 #endif /* Saul */
 #include <stdlib.h>
@@ -56,8 +56,7 @@
 #include <X11/Intrinsic.h>
 #include <X11/cursorfont.h>
 
-#include "../../fvwm/module.h"
-#include "../../version.h"
+#include <fvwm/module.h>
 #include "FvwmWinList.h"
 #include "ButtonArray.h"
 #include "List.h"
@@ -122,9 +121,9 @@ char *temp, *s;
 
   if((argc != 6)&&(argc != 7)) {
     fprintf(stderr,"%s Version %s should only be executed by fvwm!\n",Module,
-      VERSION);
+      PACKAGE_VERSION);
     ConsoleMessage("%s Version %s should only be executed by fvwm!\n",Module,
-      VERSION);
+      PACKAGE_VERSION);
    exit(1);
   }
 

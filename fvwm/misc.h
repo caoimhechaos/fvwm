@@ -31,7 +31,7 @@
 
 #include <ctype.h>
 #include "menus.h"
-#include "../libs/fvwmlib.h"
+#include <libs/fvwmlib.h>
 
 /************************************************************************
  * ReapChildren - wait() for all dead child processes
@@ -175,7 +175,7 @@ extern void       DrawIconWindow(FvwmWindow *);
 extern void       CreateIconWindow(FvwmWindow *tmp_win, int def_x, int def_y);
 
 
-extern FVWM_INLINE void RelieveWindow(FvwmWindow *, Window, 
+extern inline void RelieveWindow(FvwmWindow *, Window, 
 				      int, int, int, int, GC, GC, int);
 void RelieveParts(FvwmWindow *t,int i,GC hor, GC vert);
 #define NO_HILITE     0x0000
@@ -295,7 +295,7 @@ void SetInts(char *text, FILE *fd, char **arg,int *);
 void SetBox(char *text, FILE *fd, char **arg,int *);
 void set_func(char *, FILE *, char **,int *);
 void copy_config(FILE **config_fd);
-FVWM_INLINE void DrawPattern(Window, GC, GC, int, int,int);
+inline void DrawPattern(Window, GC, GC, int, int,int);
 Pixel    GetShadow(Pixel);
 Pixel    GetHilite(Pixel);
 

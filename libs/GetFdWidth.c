@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "../configure.h"
+#include <config.h>
 
 
 int GetFdWidth(void)

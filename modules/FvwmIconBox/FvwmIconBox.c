@@ -24,9 +24,9 @@
 #define DEAD 0
 #define DELETE 1
 
-#include "../../configure.h"
+#include <config.h>
 
-#ifdef ISC
+#ifdef HAVE_SYS_BSDTYPES_H
 #include <sys/bsdtypes.h> /* Saul */
 #endif
 
@@ -42,7 +42,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <stdlib.h>
-#include "../../fvwm/module.h"
+#include <fvwm/module.h>
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -60,7 +60,6 @@
 #endif
 
 #include "FvwmIconBox.h"
-#include "../../version.h"
 
 char *MyName;
 
@@ -176,7 +175,7 @@ void main(int argc, char **argv)
   if((argc != 6)&&(argc != 7))
     {
       fprintf(stderr,"%s Version %s should only be executed by fvwm!\n",MyName,
-	      VERSION);
+	      PACKAGE_VERSION);
       exit(1);
     }
 
@@ -846,8 +845,8 @@ void RedrawBottomButton(GC rgc, GC sgc)
     Original work from GoodStuff:
       Copyright 1993, Robert Nation.
 ************************************************************************/
-FVWM_INLINE void RelieveWindow(Window win,int x,int y,int w,int h,
-		   GC rgc,GC sgc)
+inline void RelieveWindow(Window win,int x,int y,int w,int h,
+			  GC rgc,GC sgc)
 {
   XSegment seg[4];
   int i;

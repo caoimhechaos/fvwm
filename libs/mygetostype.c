@@ -1,5 +1,5 @@
 #include <string.h>
-#include "../configure.h"
+#include <config.h>
 
 #if HAVE_UNAME
 #include <sys/utsname.h>

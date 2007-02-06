@@ -6,7 +6,7 @@
  * this program or anything related to it.
  ****************************************************************************/
 
-#include "../configure.h"
+#include <config.h>
 
 #include <stdio.h>
 #include <signal.h>
@@ -14,8 +14,7 @@
 #include <X11/Xos.h>
 #include <X11/Xatom.h>
 #include <X11/xpm.h>
-#include "../version.h"
-#include "../libs/fvwmlib.h"     
+#include <libs/fvwmlib.h>
 int save_colors = 0;
 Display *dpy;
 int screen;
@@ -33,7 +32,7 @@ int main(int argc, char **argv)
 
   if(argc != 2)
     {
-      fprintf(stderr,"Xpmroot Version %s\n",VERSION);
+      fprintf(stderr,"Xpmroot Version %s\n",PACKAGE_VERSION);
       fprintf(stderr,"Usage: xpmroot xpmfile\n");
       fprintf(stderr,"Try Again\n");
       exit(1);

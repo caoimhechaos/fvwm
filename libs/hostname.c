@@ -1,4 +1,4 @@
-#include "../configure.h"
+#include <config.h>
 
 #if HAVE_UNAME
 /* define mygethostname() by using uname() */

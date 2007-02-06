@@ -66,10 +66,9 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <stdlib.h>
-#include "../../configure.h"
-#include "../../fvwm/module.h"
-#include "../../version.h"
-#include "../../libs/fvwmlib.h"     
+#include <config.h>
+#include <fvwm/module.h>
+#include <libs/fvwmlib.h>
 
 /*
  * rplay includes:
@@ -145,7 +144,7 @@ main(int argc, char **argv)
 	if ((argc != 6)&&(argc != 7))
 	{
 		fprintf(stderr,"%s Version %s should only be executed by fvwm!\n",
-			MyName, VERSION);
+			MyName, PACKAGE_VERSION);
 		exit(1);
 	}
 

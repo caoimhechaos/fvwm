@@ -34,7 +34,7 @@
  * fvwm - "F? Virtual Window Manager"
  ***********************************************************************/
 
-#include "../configure.h"
+#include <config.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -62,8 +62,6 @@
 #endif
 
 #define MAXHOSTNAME 255
-
-#include "../version.h"
 
 ScreenInfo Scr;		        /* structures for the screen */
 Display *dpy;			/* which display are we talking to */
@@ -224,7 +222,7 @@ void main(int argc, char **argv)
 #endif
 	else if (mystrncasecmp(argv[i], "-version", 8) == 0)
 	  {
-	    fprintf(stderr, "Fvwm Version %s\n", VERSION);
+	    fprintf(stderr, "Fvwm Version %s\n", PACKAGE_VERSION);
 	  }
 	else
 	  {
@@ -987,7 +985,7 @@ void usage(void)
 #define USAGE "Fvwm Ver %s\n\nusage: fvwm [-d dpy] [-debug] [-f config_file] [-s]\n"
 #endif
 
-  fprintf(stderr,USAGE,VERSION);
+  fprintf(stderr,USAGE,PACKAGE_VERSION);
 
 }
 

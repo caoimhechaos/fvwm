@@ -10,8 +10,8 @@
 #define TRUE 1
 #define FALSE 
 
-#include "../../configure.h"
-#ifdef ISC
+#include <config.h>
+#ifdef HAVE_SYS_BSDTYPES_H
 #include <sys/bsdtypes.h> /* Saul */
 #endif 
 
@@ -27,9 +27,8 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <stdlib.h>
-#include "../../fvwm/module.h"
-#include "../../libs/fvwmlib.h"     
-#include "../../version.h"
+#include <fvwm/module.h>
+#include <libs/fvwmlib.h>
 
 int fd_width;
 int fd[2];

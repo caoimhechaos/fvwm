@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fvwmlib.h"
-#include "../fvwm/module.h"
+#include <fvwm/module.h>
 
 /************************************************************************
  * 

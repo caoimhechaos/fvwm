@@ -36,7 +36,7 @@
  *
  ***********************************************************************/
 
-#include "../configure.h"
+#include <config.h>
 
 #include <stdio.h>
 #include <signal.h>
@@ -531,9 +531,9 @@ void SetTitleBar (FvwmWindow *t,Bool onoroff, Bool NewTitle)
  *  Draws the relief pattern around a window
  *
  ****************************************************************************/
-FVWM_INLINE void RelieveWindow(FvwmWindow *t,Window win,
+inline void RelieveWindow(FvwmWindow *t,Window win,
 			       int x,int y,int w,int h,
-			       GC ReliefGC,GC ShadowGC, int hilite)
+			GC ReliefGC,GC ShadowGC, int hilite)
 {
   XSegment seg[4];
   int i;
@@ -806,7 +806,7 @@ void RelieveParts(FvwmWindow *t,int i,GC hor, GC vert)
  *  Draws a little pattern within a window
  *
  ****************************************************************************/
-FVWM_INLINE void DrawPattern(Window win, GC ShadowGC, GC ReliefGC, int h1, int w1, int t1)
+inline void DrawPattern(Window win, GC ShadowGC, GC ReliefGC, int h1, int w1, int t1)
 {
   XSegment seg[2];
   int i,h,b,u,w,r,l;

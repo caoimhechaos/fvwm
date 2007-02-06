@@ -10,7 +10,7 @@
 #define TRUE 1
 #define FALSE 
 
-#include "../../configure.h"
+#include <config.h>
 
 #include <stdio.h>
 #include <signal.h>
@@ -20,7 +20,7 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <ctype.h>
-#ifdef ISC /* Saul */
+#ifdef HAVE_SYS_BSDTYPES_H /* Saul */
 #include <sys/bsdtypes.h> /* Saul */
 #endif /* Saul */
  
@@ -35,12 +35,11 @@
 #include <X11/Xatom.h>
 #include <X11/Intrinsic.h>
 
-#include "../../fvwm/module.h"
+#include <fvwm/module.h>
 
-#include "../../libs/fvwmlib.h"       
+#include <libs/fvwmlib.h>       
 #include "FvwmPager.h"
-#include "../../version.h"
-#include "../../fvwm/fvwm.h"
+#include <fvwm/fvwm.h>
 
 char *MyName;
 int fd_width;
@@ -102,13 +101,13 @@ void main(int argc, char **argv)
   if((argc != 7)&&(argc != 6))
     {
       fprintf(stderr,"%s Version %s should only be executed by fvwm!\n",MyName,
-	      VERSION);
+	      PACKAGE_VERSION);
       exit(1);
     }
   if(argc != 7)
     { 
       fprintf(stderr,"%s Version %s requires an argument: %s n m\n",
-	      MyName,VERSION,MyName);
+	      MyName,PACKAGE_VERSION,MyName);
       fprintf(stderr,"   where desktops n through m are displayed\n");
       exit(1);
     }

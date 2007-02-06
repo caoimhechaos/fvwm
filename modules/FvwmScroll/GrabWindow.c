@@ -11,9 +11,9 @@
 #define FALSE 0
 #define MAX_ICON_NAME_LEN 255
 
-#include "../../configure.h"
+#include <config.h>
 
-#ifdef ISC
+#ifdef HAVE_SYS_BSDTYPES_H
 #include <sys/bsdtypes.h> /* Saul */
 #endif
 
@@ -29,7 +29,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <stdlib.h>
-#include "../../fvwm/module.h"
+#include <fvwm/module.h>
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>

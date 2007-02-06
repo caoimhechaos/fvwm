@@ -10,7 +10,7 @@
 #define TRUE 1
 #define FALSE 
 
-#include "../../configure.h"
+#include <config.h>
 
 #include <stdio.h>
 #include <signal.h>
@@ -21,10 +21,9 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <stdlib.h>
-#include "../../fvwm/module.h"
+#include <fvwm/module.h>
 
 #include "FvwmDebug.h"
-#include "../../version.h"
 
 char *MyName;
 int fd_width;
@@ -53,7 +52,7 @@ void main(int argc, char **argv)
   if((argc != 6)&&(argc != 7))
     {
       fprintf(stderr,"%s Version %s should only be executed by fvwm!\n",MyName,
-	      VERSION);
+	      PACKAGE_VERSION);
       exit(1);
     }
 

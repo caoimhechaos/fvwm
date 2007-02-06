@@ -13,7 +13,7 @@
  *
  ***************************************************************************/
 
-#include "../configure.h"
+#include <config.h>
 
 #include <stdio.h>
 #include <signal.h>
@@ -36,7 +36,6 @@
 #include "misc.h"
 #include "parse.h"
 #include "screen.h"
-#include "../version.h"
 
 char *IconPath = FVWM_ICONDIR;
 #ifdef XPM
@@ -2091,7 +2090,7 @@ static char *m4_defs(Display *display, const char *host, char *m4_options, char 
       fputs(MkDef("COLOR", "Yes"), tmpf);
     else 
       fputs(MkDef("COLOR", "No"), tmpf);
-    fputs(MkDef("FVWM_VERSION", VERSION), tmpf);
+    fputs(MkDef("FVWM_VERSION", PACKAGE_VERSION), tmpf);
 
     /* Add options together */
     *options = '\0';

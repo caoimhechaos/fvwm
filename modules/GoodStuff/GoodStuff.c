@@ -10,9 +10,9 @@
 #define TRUE 1
 #define FALSE 
 
-#include "../../configure.h"
+#include <config.h>
 
-#ifdef ISC
+#ifdef HAVE_SYS_BSDTYPES_H
 #include <sys/bsdtypes.h> /* Saul */
 #endif
 
@@ -28,7 +28,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <stdlib.h>
-#include "../../fvwm/module.h"
+#include <fvwm/module.h>
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -37,7 +37,7 @@
 #include <X11/Intrinsic.h>
 
 #include "GoodStuff.h"
-#include "../../version.h"
+
 char *MyName;
 
 XFontStruct *font;
@@ -128,7 +128,7 @@ void main(int argc, char **argv)
   if((argc != 6)&&(argc != 7))
     {
       fprintf(stderr,"%s Version %s should only be executed by fvwm!\n",MyName,
-	      VERSION);
+	      PACKAGE_VERSION);
       exit(1);
     }
 
@@ -503,8 +503,8 @@ void RedrawWindow(int newbutton)
  *  Draws the relief pattern around a window
  *
  ****************************************************************************/
-FVWM_INLINE void RelieveWindow(Window win,int x,int y,int w,int h,
-		   GC rgc,GC sgc)
+inline void RelieveWindow(Window win,int x,int y,int w,int h,
+			  GC rgc,GC sgc)
 {
   XSegment seg[4];
   int i;

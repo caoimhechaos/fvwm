@@ -8,7 +8,7 @@
  *
  ***********************************************************************/
 
-#include "../../configure.h"
+#include <config.h>
 
 #include <stdio.h>
 #include <signal.h>
@@ -20,7 +20,7 @@
 #include <X11/Xatom.h>
 #include <X11/Intrinsic.h>
 
-#include "../../fvwm/fvwm.h"
+#include <fvwm/fvwm.h>
 #include "FvwmPager.h"
 extern ScreenInfo Scr;
 extern Display *dpy;

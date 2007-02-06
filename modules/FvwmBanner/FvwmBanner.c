@@ -5,9 +5,9 @@
  *                                                                           
  ***************************************************************************/
 
-#include "../../configure.h"
+#include <config.h>
 
-#ifdef ISC
+#ifdef HAVE_SYS_BSDTYPES_H
 #include <sys/bsdtypes.h> /* Saul */
 #endif
 
@@ -38,7 +38,7 @@
 #include "../../fvwm/sun_headers.h"
 #endif
 
-#include "../../libs/fvwmlib.h"     
+#include <libs/fvwmlib.h>
 
 #ifdef NEEDS_ALPHA_HEADER
 #include "../../fvwm/alpha_header.h"

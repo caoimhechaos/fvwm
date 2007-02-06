@@ -1,4 +1,4 @@
-#include "../../libs/fvwmlib.h"       
+#include <libs/fvwmlib.h>
 char *safemalloc(int length);
 void DeadPipe(int nonsense);
 void GetTargetWindow(Window *app_win);

@@ -4,8 +4,9 @@ It can be configured to use far less memory than twm, or to give a very
 good emulation of mwm. A nice button-bar can be used to provide convenient 
 access to frequently used functions or programs.
 
-Fvwm has three pieces
+Fvwm used to have three pieces until version 1.24:
 fvwm-1.23-core.tar.gz - the actual window manager
 fvwm-1.23-icons.tar.gz - some icons that go nicely with fvwm
 fvwm-1.23-modules.tar.gz - add on desktop accessories
 
+Nowadays it is distributed in one big chunk.

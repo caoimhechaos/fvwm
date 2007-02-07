@@ -1,8 +1,11 @@
+Todo List for post-1.24r-tch2 (sorted by priority)
+	* track down the window placement hangup
+	* prevent windows from getting stuck while a window is being
+	  placed/moved (basically polling or multithreading)
+	* xcompmgr compatibility stuff
+
 Todo List for 1.24r-tch2 (sorted by priority)
 	* import bbraun's patches for Xinerama support
-	* track down the window placement hangup
-	* prevent windows from getting stuck while a window is being placed/moved
-	* xcompmgr compatibility stuff
 
 1.24r to 1.24r-tch1
       1. Converted the build system from imake to automake (Tonnerre)
